@@ -1,0 +1,4 @@
+#Mon Feb 26 17:22:31 CET 2024
+base.0=C\:\\Users\\Kiarar\\StudioProjects\\Fluff\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

@@ -47,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedAmount = 0;
   bool _isNegative = false;
   bool _isMeSelected = true;
+  var _list1 = [];
+  var _list2 = [];
+
+  String e = "";
 
   void _selectAmount(int amount) {
     setState(() {
@@ -56,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _selectPlayer(bool isMe) {
     setState(() {
-    _isMeSelected = isMe;
+      _isMeSelected = isMe;
     });
   }
 
@@ -72,8 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (_isMeSelected) {
         _health1 += amount;
+        _list1.add(amount);
       } else {
         _health2 += amount;
+        _list2.add(amount);
       }
     });
   }
@@ -115,27 +121,22 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Your helath:',
+            Text(
+              'Your health: $_health1',
             ),
             Text(
-              '$_selectedAmount',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Enemy health: $_health2',
             ),
-
-            Row(
-
-              children: [
-              Text(
-                '$_health1',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Text(
-                '$_health2',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],),
-
+            Text(
+              'isMe: $_isMeSelected, amount: $_selectedAmount',
+            ),
+            
+            SegmentedButton(segments: const [
+              ButtonSegment(value: true, label: Text("Me"),),
+              ButtonSegment(value: false, label: Text("Enemy"),)
+            ], selected: <bool>{
+              _isMeSelected
+            }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -159,29 +160,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              ElevatedButton(
-                child: const Text('500'),
-                onPressed: () {
-                  _selectedAmount = 500;
-                },
-              ),
-              ElevatedButton(
-                child: const Text('100'),
-                onPressed: () {
-                  _selectedAmount = 100;
-                },
-              ),
-              ElevatedButton(
-                child: const Text('50'),
-                onPressed: () {
-                  _selectedAmount = 50;
-                },
-              ),
-            ],),
+                ElevatedButton(
+                  child: const Text('500'),
+                  onPressed: () {
+                    _selectedAmount = 500;
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('100'),
+                  onPressed: () {
+                    _selectedAmount = 100;
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('50'),
+                  onPressed: () {
+                    _selectedAmount = 50;
+                  },
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -201,7 +202,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             )
-
           ],
         ),
       ),

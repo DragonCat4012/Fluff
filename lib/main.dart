@@ -1,3 +1,4 @@
+import 'package:fluff/LogEntry.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -43,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _health1 = 8000; // me
   int _health2 = 8000; // opponent
+  int _maxHealth = 8000;
 
   int _selectedAmount = 0;
   bool _isNegative = false;
@@ -103,40 +105,54 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
+              'amount: $_selectedAmount',
+            ),
+            SegmentedButton(
+              segments: const [
+                ButtonSegment(
+                  value: true,
+                  label: Text("Me"),
+                  icon: Icon(null),
+                ),
+                ButtonSegment(
+                  value: false,
+                  label: Text("Enemy"),
+                  icon: Icon(null),
+                )
+              ],
+              selected: <bool>{_isMeSelected},
+              showSelectedIcon: false,
+              onSelectionChanged: (newSelection) {
+                setState(() {
+                  _isMeSelected = newSelection.first;
+                });
+              },
+            ),
+            Text(
               'Your health: $_health1',
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              margin: EdgeInsets.all(20),
+              child: LinearProgressIndicator(
+                value: _health1 / _maxHealth,
+              ),
             ),
             Text(
               'Enemy health: $_health2',
             ),
-            Text(
-              'isMe: $_isMeSelected, amount: $_selectedAmount',
+            Container(
+              alignment: Alignment.topCenter,
+              margin: EdgeInsets.all(20),
+              child: LinearProgressIndicator(
+                value: _health2 / _maxHealth,
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+              ),
             ),
-            
-            SegmentedButton(segments: const [
-              ButtonSegment(value: true, label: Text("Me"),),
-              ButtonSegment(value: false, label: Text("Enemy"),)
-            ], selected: <bool>{
-              _isMeSelected
-            }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -201,7 +217,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
               ],
-            )
+            ),
+
+
+            Padding(
+                padding: const EdgeInsets.only(top: 100.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Column(
+                      children: _list1.map((number) => Text('$number')).toList(),
+                    )),
+
+                    Expanded(
+                        child: Column(
+                          children: _list2.map((number) => Text('$number')).toList(),
+                        )),
+
+                  ],
+                )),
+
           ],
         ),
       ),

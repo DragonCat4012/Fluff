@@ -132,27 +132,46 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-            Text(
-              'Your health: $_health1',
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              margin: EdgeInsets.all(20),
-              child: LinearProgressIndicator(
-                value: _health1 / _maxHealth,
+
+             Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+                  RotatedBox(
+                    quarterTurns: 3,
+                    child: SizedBox(
+                      width: 200,
+                      height: 10,
+                      child:  LinearProgressIndicator(
+                        value: _health1 / _maxHealth,
+                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        backgroundColor: Colors.grey,
+                    //  backgroundColor: Colors.lime,
+                    ),
+            )
+                  ),
+                  Text(
+                    'Your health: $_health1',
+                  ),
+                  Text(
+                    'Enemy health: $_health2',
+                  ),
+                  RotatedBox(
+                      quarterTurns: 3,
+                      child: SizedBox(
+                        width: 200,
+                        height: 10,
+                        child:  LinearProgressIndicator(
+                          value: _health2 / _maxHealth,
+                          valueColor: AlwaysStoppedAnimation(Colors.purple),
+                          backgroundColor: Colors.grey,
+                        ),
+                      )
+                  ),
+                ],
               ),
-            ),
-            Text(
-              'Enemy health: $_health2',
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              margin: EdgeInsets.all(20),
-              child: LinearProgressIndicator(
-                value: _health2 / _maxHealth,
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-              ),
-            ),
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -220,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
 
-            Padding(
+          /*  Padding(
                 padding: const EdgeInsets.only(top: 100.0),
                 child: Row(
                   children: [
@@ -235,7 +254,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         )),
 
                   ],
-                )),
+                )),*/
 
           ],
         ),
@@ -243,7 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.note),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

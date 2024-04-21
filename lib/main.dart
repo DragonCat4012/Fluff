@@ -1,4 +1,5 @@
 import 'package:fluff/LogEntry.dart';
+import 'package:fluff/LogView.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -237,30 +238,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-
-
-          /*  Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Column(
-                      children: _list1.map((number) => Text('$number')).toList(),
-                    )),
-
-                    Expanded(
-                        child: Column(
-                          children: _list2.map((number) => Text('$number')).toList(),
-                        )),
-
-                  ],
-                )),*/
-
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:() {
+          //TODO: Show Log
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", list1: _list1.cast<int>(), list2: list2.cast<int>())),
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.note),
       ), // This trailing comma makes auto-formatting nicer for build methods.

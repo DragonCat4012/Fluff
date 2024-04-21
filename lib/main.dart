@@ -246,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //TODO: Show Log
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", list1: _list1.cast<int>(), list2: list2.cast<int>())),
+            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", list1: _list1.cast<int>(), list2: _list2.cast<int>())),
           );
         },
         tooltip: 'Increment',

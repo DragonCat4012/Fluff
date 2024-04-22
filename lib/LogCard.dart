@@ -11,7 +11,6 @@ class LogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.fromLTRB(2.0, 5.0, 5.0, 2.0),
-        child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
                 border: Border.all(
@@ -78,6 +77,6 @@ class LogCard extends StatelessWidget {
                   ]),
          //   ),
           ),
-        ));
+        );
   }
 }

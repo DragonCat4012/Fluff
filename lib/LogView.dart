@@ -1,6 +1,4 @@
-import 'dart:ffi';
 
-import 'package:fluff/LogView.dart';
 import 'package:flutter/material.dart';
 
 

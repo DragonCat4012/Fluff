@@ -1,5 +1,6 @@
 import 'package:fluff/LogView.dart';
 import 'package:flutter/material.dart';
+import 'package:fluff/LogEntry.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,13 +45,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _health1 = 8000; // me
   int _health2 = 8000; // opponent
-  int _maxHealth = 8000;
+  final int _maxHealth = 8000;
 
   int _selectedAmount = 0;
   bool _isNegative = false;
   bool _isMeSelected = true;
-  var _list1 = [];
-  var _list2 = [];
+  final _list1 = [];
+  final _list2 = [];
+  final _logList = [];
 
   String e = "";
 
@@ -83,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         _health2 += amount;
         _list2.add(amount);
       }
+      _logList.add(new LogEntry(amount, _health1, _health2, _isMeSelected));
     });
   }
 
@@ -144,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 10,
                       child:  LinearProgressIndicator(
                         value: _health1 / _maxHealth,
-                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        valueColor: const AlwaysStoppedAnimation(Colors.orange),
                         backgroundColor: Colors.grey,
                     //  backgroundColor: Colors.lime,
                     ),
@@ -163,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 10,
                         child:  LinearProgressIndicator(
                           value: _health2 / _maxHealth,
-                          valueColor: AlwaysStoppedAnimation(Colors.purple),
+                          valueColor: const AlwaysStoppedAnimation(Colors.purple),
                           backgroundColor: Colors.grey,
                         ),
                       )
@@ -245,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //TODO: Show Log
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", list1: _list1.cast<int>(), list2: _list2.cast<int>())),
+            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", logEntries: _logList.cast<LogEntry>())),
           );
         },
         tooltip: 'Increment',

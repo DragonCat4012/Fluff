@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:fluff/LogEntry.dart';
 
 class LogPage extends StatefulWidget {
-   LogPage({super.key, required this.title, required this.list1, required this.list2});
+   const LogPage({super.key, required this.title, required this.logEntries});
   final String title;
-  final List<int> list1;
-  final List<int> list2;
+  final List<LogEntry> logEntries;
 
   @override
   State<LogPage> createState() => _LogPageState();
@@ -21,7 +19,7 @@ class _LogPageState extends State<LogPage> {
         title: const Text('Log'),
       ),
       body:
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
@@ -38,12 +36,7 @@ class _LogPageState extends State<LogPage> {
                   children: [
                     Expanded(
                         child: Column(
-                          children: widget.list1.map((number) => Text('$number')).toList(),
-                        )),
-
-                    Expanded(
-                        child: Column(
-                          children: widget.list2.map((number) => Text('$number')).toList(),
+                          children: widget.logEntries.map((entry) => Text('${entry.value}')).toList(),
                         )),
 
                   ],

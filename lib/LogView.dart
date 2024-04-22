@@ -1,4 +1,4 @@
-import 'package:fluff/LogEntryView1.dart';
+import 'package:fluff/LogCard.dart';
 import 'package:flutter/material.dart';
 import 'package:fluff/LogEntry.dart';
 
@@ -32,14 +32,13 @@ class _LogPageState extends State<LogPage> {
 
         ),
             Padding(
-                padding: const EdgeInsets.only(top: 100.0),
+                padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
                 child: Row(
                   children: [
                     Expanded(
                         child: Column(
-                          children: widget.logEntries.map((entry) => QuoteCard(entry)).toList(),
+                          children: widget.logEntries.map((entry) => LogCard(entry)).toList(),
                         )),
-
                   ],
                 ))
           ],

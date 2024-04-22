@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluff/LogEntry.dart';
 
 class QuoteCard extends StatelessWidget {
-  final int number;
+  final LogEntry entry ;
 
-  const QuoteCard(this.number, {super.key});
+  static final minWidth = 80.0;
+  const QuoteCard(this.entry, {super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +21,53 @@ class QuoteCard extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            const SizedBox(
-                              width: 20.0,
+                            SizedBox(
+                              width: minWidth,
+                              child:
+                              Text(
+                                '${entry.meHealth}',
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
                             ),
+
+                            SizedBox(
+                              width: minWidth,
+                              child:
                             Text(
-                              '$number',
+                              entry.getMeText(),
                               style: const TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.purple,
                               ),
                             ),
+                    ),
+                      SizedBox(
+                          width: minWidth,
+                          child:
+                            Text(
+                              entry.getEnemyText(),
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.purple,
+                              ),
+                            ),
+                      ),
+                      SizedBox(
+                          width: minWidth,
+                          child:
+                            Text(
+                              '${entry.enemyHealth}',
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.grey,
+                              ),
+                            ),
+                      ),
                           ]),
                     ),
                   ]),
@@ -38,27 +76,3 @@ class QuoteCard extends StatelessWidget {
         ));
   }
 }
-/*
-
-Padding(
-padding: const EdgeInsets.only(top: 100.0),
-child: Row(
-children: [
-Expanded(
-child: Column(
-children: _list1.map((number) => Text('$number')).toList(),
-)),
-Expanded(
-child: Column(
-children: [Text("1"), Text("2")],
-)),
-],
-)),
-
-
-ListView(
-children:
-[Text("1"), Text("2")],
-),
-
-*/

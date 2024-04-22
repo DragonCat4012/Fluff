@@ -13,4 +13,24 @@ class LogEntry {
     this.isMe = isMe;
   }
 
+  String getMeText() {
+    if (isMe) {
+      return '$value';
+    } else {
+      return "";
+    }
+  }
+
+  String getEnemyText() {
+    if (!isMe) {
+      return '$value';
+    } else {
+      return "";
+    }
+  }
+
+  /*Color getColor() {
+    return value > 0 ? Color.green : Color.red;
+  }*/
+
 }

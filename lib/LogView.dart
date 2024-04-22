@@ -1,3 +1,4 @@
+import 'package:fluff/LogEntryView1.dart';
 import 'package:flutter/material.dart';
 import 'package:fluff/LogEntry.dart';
 
@@ -36,7 +37,7 @@ class _LogPageState extends State<LogPage> {
                   children: [
                     Expanded(
                         child: Column(
-                          children: widget.logEntries.map((entry) => Text('${entry.value}')).toList(),
+                          children: widget.logEntries.map((entry) => QuoteCard(entry)).toList(),
                         )),
 
                   ],

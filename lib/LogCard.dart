@@ -10,7 +10,7 @@ class LogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(2.0, 5.0, 5.0, 2.0),
+        padding: EdgeInsets.fromLTRB(2.0, 5.0, 5.0, 2.0),
           child: Container(
             decoration: BoxDecoration(
                 border: Border.all(
@@ -44,9 +44,9 @@ class LogCard extends StatelessWidget {
                               child:
                             Text(
                               entry.getMeText(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18.0,
-                                color: Colors.purple,
+                                color: entry.color,
                               ),
                             ),
                     ),
@@ -55,9 +55,9 @@ class LogCard extends StatelessWidget {
                           child:
                             Text(
                               entry.getEnemyText(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18.0,
-                                color: Colors.purple,
+                                color: entry.color,
                               ),
                             ),
                       ),

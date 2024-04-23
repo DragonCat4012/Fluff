@@ -5,12 +5,16 @@ class LogEntry {
   int meHealth = 0;
   int enemyHealth = 0;
   bool isMe = true;
+  Color color = Color(0xffb74093);
+  Color positiveColor = Color(0xff366e3b);
+  Color negativeColor = Color(0xff6e3636);
 
   LogEntry(int value, int meHealth, int enemyHealth, bool isMe) {
     this.value = value;
     this.meHealth = meHealth;
     this.enemyHealth = enemyHealth;
     this.isMe = isMe;
+    this.color = value > 0 ? positiveColor : negativeColor;
   }
 
   String getMeText() {
@@ -29,8 +33,7 @@ class LogEntry {
     }
   }
 
-  /*Color getColor() {
-    return value > 0 ? Color.green : Color.red;
-  }*/
-
+  Color getColor() {
+    return value > 0 ? positiveColor : negativeColor;
+  }
 }

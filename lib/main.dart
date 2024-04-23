@@ -50,8 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedAmount = 0;
   bool _isNegative = false;
   bool _isMeSelected = true;
-  final _list1 = [];
-  final _list2 = [];
   final _logList = [];
 
   String e = "";
@@ -80,10 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (_isMeSelected) {
         _health1 += amount;
-        _list1.add(amount);
       } else {
         _health2 += amount;
-        _list2.add(amount);
       }
       _logList.add(new LogEntry(amount, _health1, _health2, _isMeSelected));
     });
@@ -245,10 +241,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:() {
-          //TODO: Show Log
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", logEntries: _logList.cast<LogEntry>())),
+            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", logEntries: _logList.cast<LogEntry>().reversed.toList())),
           );
         },
         tooltip: 'Increment',

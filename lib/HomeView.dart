@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'GameView.dart';
 import 'Styling.dart';
+import 'PortraitView.dart';
+import 'LandscapeOne.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -75,6 +77,39 @@ class HomeView extends StatelessWidget {
                         );
                       },
                       child: Text("Logs"),
+                      style: Styling().defaultButtonStyle(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PortraitView(title: "Game")),
+                        );
+                      },
+                      child: Text("Portrait"),
+                      style: Styling().defaultButtonStyle(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LandscapeOne(title: "Game")),
+                        );
+                      },
+                      child: Text("Landscape 1"),
                       style: Styling().defaultButtonStyle(),
                     ),
                   ),

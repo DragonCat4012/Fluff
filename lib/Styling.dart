@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
  class Styling {
 
    Styling();
-   
+
    static var styleA = ButtonStyle(
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(

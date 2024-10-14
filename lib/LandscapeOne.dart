@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:fluff/LogEntry.dart';
 import 'package:fluff/LogView.dart';
+import 'GameViewModel.dart';
 
 import 'Styling.dart';
 
@@ -25,16 +26,11 @@ class LandscapeOne extends StatefulWidget {
 }
 
 class _LandscapeOne extends State<LandscapeOne> {
-  int _counter = 0;
-  int _health1 = 8000; // me
-  int _health2 = 8000; // opponent
-  final int _maxHealth = 8000;
-
   int _selectedAmount = 0;
   bool _isNegative = false;
   bool _isMeSelected = true;
   final _logList = [];
-  
+
   static const double barRadius = 8;
 
   void _selectAmount(int amount) {
@@ -60,19 +56,17 @@ class _LandscapeOne extends State<LandscapeOne> {
       int amount = _isNegative ? -_selectedAmount : _selectedAmount;
 
       if (_isMeSelected) {
-        _health1 += amount;
+        vm.health1 += amount;
       } else {
-        _health2 += amount;
+        vm.health2 += amount;
       }
-      _logList.add(new LogEntry(amount, _health1, _health2, _isMeSelected));
+      _logList.add(new LogEntry(amount, vm.health1, vm.health2, _isMeSelected));
     });
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+
+
+  var vm = GameViewModel(8000);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +97,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '$_health1',
+                      vm.get_health1(),
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -111,7 +105,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                       ),
                     ),
                     Text(
-                      '$_health2',
+                      '${vm.health2}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -127,16 +121,16 @@ class _LandscapeOne extends State<LandscapeOne> {
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 20),
                         width: 300,
                         height: 20,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(barRadius),
                               bottomLeft: Radius.circular(barRadius)),
                           child: LinearProgressIndicator(
                             minHeight: 20,
-                            value: _health1 / _maxHealth,
+                            value: vm.health1 / vm.maxHealth,
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(Colors.purple),
                           ),
@@ -145,18 +139,18 @@ class _LandscapeOne extends State<LandscapeOne> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 20),
                         width: 300,
                         height: 20,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(barRadius),
                               bottomRight: Radius.circular(barRadius)),
                           child: RotatedBox(
                             quarterTurns: 2,
                             child: LinearProgressIndicator(
                               minHeight: 20,
-                              value: 2000 / _maxHealth,
+                              value: vm.health2 / vm.maxHealth,
                               valueColor:
                                   const AlwaysStoppedAnimation(Colors.orange),
                             ),
@@ -167,76 +161,84 @@ class _LandscapeOne extends State<LandscapeOne> {
                   ],
                 ),
               ),
+
+              // Buttons
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Text(
-                  'amount: $_selectedAmount',
+                child: Row(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('4000'),
+                          onPressed: () {
+                            _selectedAmount = 4000;
+                          },
+                        ),
+
+                        ElevatedButton(
+                          child: const Text('500'),
+                          onPressed: () {
+                            _selectedAmount = 500;
+                          },
+                        ),
+                        ElevatedButton(
+                          child: const Text('+'),
+                          onPressed: () {
+                            _editNegative(false);
+                            _editPlayer1Life();
+                          },
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('2000'),
+                          onPressed: () {
+                            _selectedAmount = 2000;
+                          },
+                        ),
+
+
+                        ElevatedButton(
+                          child: const Text('100'),
+                          onPressed: () {
+                            _selectedAmount = 100;
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('1000'),
+                          onPressed: () {
+                            _selectedAmount = 1000;
+                          },
+                        ),
+                        ElevatedButton(
+                          child: const Text('50'),
+                          onPressed: () {
+                            _selectedAmount = 50;
+                          },
+                        ),
+
+                        ElevatedButton(
+                          child: const Text('-'),
+                          onPressed: () {
+                            _editNegative(true);
+                            _editPlayer1Life();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: const Text('4000'),
-                    onPressed: () {
-                      _selectedAmount = 4000;
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('2000'),
-                    onPressed: () {
-                      _selectedAmount = 2000;
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('1000'),
-                    onPressed: () {
-                      _selectedAmount = 1000;
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: const Text('500'),
-                    onPressed: () {
-                      _selectedAmount = 500;
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('100'),
-                    onPressed: () {
-                      _selectedAmount = 100;
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('50'),
-                    onPressed: () {
-                      _selectedAmount = 50;
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: const Text('+'),
-                    onPressed: () {
-                      _editNegative(false);
-                      _editPlayer1Life();
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('-'),
-                    onPressed: () {
-                      _editNegative(true);
-                      _editPlayer1Life();
-                    },
-                  ),
-                ],
               ),
             ],
           ),

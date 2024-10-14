@@ -34,8 +34,8 @@ class _LandscapeOne extends State<LandscapeOne> {
   bool _isNegative = false;
   bool _isMeSelected = true;
   final _logList = [];
-
-  String e = "";
+  
+  static const double barRadius = 8;
 
   void _selectAmount(int amount) {
     setState(() {
@@ -92,147 +92,164 @@ class _LandscapeOne extends State<LandscapeOne> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'amount: $_selectedAmount',
-            ),
-            SegmentedButton(
-              segments: const [
-                ButtonSegment(
-                  value: true,
-                  label: Text("Me"),
-                  icon: Icon(null),
-                ),
-                ButtonSegment(
-                  value: false,
-                  label: Text("Enemy"),
-                  icon: Icon(null),
-                )
-              ],
-              selected: <bool>{_isMeSelected},
-              showSelectedIcon: false,
-              onSelectionChanged: (newSelection) {
-                setState(() {
-                  _isMeSelected = newSelection.first;
-                });
-              },
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-
-                RotatedBox(
-                    quarterTurns: 3,
-                    child: SizedBox(
-                      width: 200,
-                      height: 10,
-                      child:  LinearProgressIndicator(
-                        value: _health1 / _maxHealth,
-                        valueColor: const AlwaysStoppedAnimation(Colors.orange),
-                        backgroundColor: Colors.grey,
-                        //  backgroundColor: Colors.lime,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Row(
+                  // Texts
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '$_health1',
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
                       ),
-                    )
-                ),
-                Text(
-                  'Your health: $_health1',
-                ),
-                Text(
-                  'Enemy health: $_health2',
-                ),
-                RotatedBox(
-                    quarterTurns: 3,
-                    child: SizedBox(
-                      width: 200,
-                      height: 10,
-                      child:  LinearProgressIndicator(
-                        value: _health2 / _maxHealth,
-                        valueColor: const AlwaysStoppedAnimation(Colors.purple),
-                        backgroundColor: Colors.grey,
+                    ),
+                    Text(
+                      '$_health2',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.orange,
                       ),
-                    )
+                    ),
+                  ],
                 ),
-              ],
-            ),
-
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('4000'),
-                  onPressed: () {
-                    _selectedAmount = 4000;
-                  },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 20),
+                        width: 300,
+                        height: 20,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(barRadius),
+                              bottomLeft: Radius.circular(barRadius)),
+                          child: LinearProgressIndicator(
+                            minHeight: 20,
+                            value: _health1 / _maxHealth,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.purple),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 20),
+                        width: 300,
+                        height: 20,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(barRadius),
+                              bottomRight: Radius.circular(barRadius)),
+                          child: RotatedBox(
+                            quarterTurns: 2,
+                            child: LinearProgressIndicator(
+                              minHeight: 20,
+                              value: 2000 / _maxHealth,
+                              valueColor:
+                                  const AlwaysStoppedAnimation(Colors.orange),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  child: const Text('2000'),
-                  onPressed: () {
-                    _selectedAmount = 2000;
-                  },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  'amount: $_selectedAmount',
                 ),
-                ElevatedButton(
-                  child: const Text('1000'),
-                  onPressed: () {
-                    _selectedAmount = 1000;
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('500'),
-                  onPressed: () {
-                    _selectedAmount = 500;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('100'),
-                  onPressed: () {
-                    _selectedAmount = 100;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('50'),
-                  onPressed: () {
-                    _selectedAmount = 50;
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('+'),
-                  onPressed: () {
-                    _editNegative(false);
-                    _editPlayer1Life();
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('-'),
-                  onPressed: () {
-                    _editNegative(true);
-                    _editPlayer1Life();
-                  },
-                ),
-              ],
-            ),
-          ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    child: const Text('4000'),
+                    onPressed: () {
+                      _selectedAmount = 4000;
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('2000'),
+                    onPressed: () {
+                      _selectedAmount = 2000;
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('1000'),
+                    onPressed: () {
+                      _selectedAmount = 1000;
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    child: const Text('500'),
+                    onPressed: () {
+                      _selectedAmount = 500;
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('100'),
+                    onPressed: () {
+                      _selectedAmount = 100;
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('50'),
+                    onPressed: () {
+                      _selectedAmount = 50;
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    child: const Text('+'),
+                    onPressed: () {
+                      _editNegative(false);
+                      _editPlayer1Life();
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('-'),
+                    onPressed: () {
+                      _editNegative(true);
+                      _editPlayer1Life();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:() {
+        onPressed: () {
           Navigator.push(
             context,
-
-            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", logEntries: _logList.cast<LogEntry>().reversed.toList())),
+            MaterialPageRoute(
+                builder: (context) => LogPage(
+                    title: "UwU",
+                    logEntries: _logList.cast<LogEntry>().reversed.toList())),
           );
         },
         tooltip: 'Increment',

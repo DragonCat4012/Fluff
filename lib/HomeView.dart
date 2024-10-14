@@ -20,101 +20,103 @@ class HomeView extends StatelessWidget {
         title: Text("Home"),
       ),
       body: Center(
-          child: Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "UwU")),
-                        );
-                      },
-                      child: Text("Load Game"),
-                      style: Styling().defaultButtonStyle(),
+        child: SingleChildScrollView(
+            child: Container(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage(title: "UwU")),
+                          );
+                        },
+                        child: Text("Load Game"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "UwU")),
-                        );
-                      },
-                      child: Text("New Game"),
-                      style: Styling().defaultButtonStyle(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage(title: "UwU")),
+                          );
+                        },
+                        child: Text("New Game"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "UwU")),
-                        );
-                      },
-                      child: Text("All Games"),
-                      style: Styling().defaultButtonStyle(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage(title: "UwU")),
+                          );
+                        },
+                        child: Text("All Games"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "UwU")),
-                        );
-                      },
-                      child: Text("Logs"),
-                      style: Styling().defaultButtonStyle(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage(title: "UwU")),
+                          );
+                        },
+                        child: Text("Logs"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PortraitView(title: "Game")),
-                        );
-                      },
-                      child: Text("Portrait"),
-                      style: Styling().defaultButtonStyle(),
+                    SizedBox(
+                      height: 50,
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  LandscapeOne(title: "Game")),
-                        );
-                      },
-                      child: Text("Landscape 1"),
-                      style: Styling().defaultButtonStyle(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PortraitView(title: "Game")),
+                          );
+                        },
+                        child: Text("Portrait"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
                     ),
-                  ),
-                ],
-              ))), // This trailing comma makes auto-formatting nicer for build methods.
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LandscapeOne(title: "Game")),
+                          );
+                        },
+                        child: Text("Landscape 1"),
+                        style: Styling().defaultButtonStyle(),
+                      ),
+                    ),
+                  ],
+                ))),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

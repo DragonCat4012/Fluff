@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class GameViewModel {
+class GameViewModel extends ChangeNotifier {
   int health1 = 8000; // me
   int health2 = 8000; //oponnent
   int maxHealth = 8000;
@@ -20,12 +20,13 @@ class GameViewModel {
     return health2.toString();
   }
 
-  // funcs
-  edit_health1(int _value) {
-    health1 += _value;
-  }
 
-  edit_health2(int _value) {
-    health2 += _value;
+  edit_health(int _player, int _value) {
+    if (_player == 1) {
+      health1 += _value;
+    } else {
+      health2 += _value;
+    }
+    notifyListeners();
   }
 }

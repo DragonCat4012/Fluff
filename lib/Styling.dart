@@ -25,8 +25,6 @@ import 'package:flutter/material.dart';
     ),
   );
 
-
-
    ButtonStyle defaultButtonStyle() {
      return styleA;
    }

@@ -114,25 +114,22 @@ class _LandscapeOne extends State<LandscapeOne> {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      LifePointOptionsView(
-                          vm: vm, color: Colors.deepPurpleAccent, target: 1),
-                      TextButton(onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LogPage(
-                                  title: "UwU",
-                                  logEntries: _logList.cast<LogEntry>().reversed.toList())),
-                        );
-                      }, child: Text("Log"),
-                        style: Styling().defaultButtonStyle(),),
-                      LifePointOptionsView(
-                          vm: vm, color: Colors.orange, target: 2)
-                    ],
-                  )
+                  Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: LifePointOptionsView(
+                                  vm: vm, color: Colors.purple, target: 1)),
+                          const SizedBox(
+                            width: 100,
+                            child: Center(child: Text("Log or so")),
+                          ),
+                          Expanded(
+                              child: LifePointOptionsView(
+                                  vm: vm, color: Colors.orange, target: 2)),
+                        ],
+                      )),
                 ],
               ));
             }),

@@ -30,109 +30,95 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
     });
   }
 
+  void _setAmount(int amount) {
+    setState(() {
+      _selectedAmount = amount;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('4000'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 4000;
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('500'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 500;
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('+'),
-                        style: buttonStyleColored(Colors.green),
-                        onPressed: () {
-                          subdivide = false;
-                          _editPlayer1Life();
-                        },
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('2000'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 2000;
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('100'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 100;
-                          });
-                        },
-                      ),
-                      Text(_selectedAmount.toString())
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('1000'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 1000;
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('50'),
-                        style: buttonStyle(),
-                        onPressed: () {
-                          setState(() {
-                            _selectedAmount = 50;
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('-'),
-                        style: buttonStyleColored(Colors.red),
-                        onPressed: () {
-                          subdivide = true;
-                          _editPlayer1Life();
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+    return  Expanded(child: buttonGroup(side: 1));
+  }
+
+  Widget buttonGroup({int side = 0}) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("4000"),
+                    onPressed: () {
+                      _setAmount(4000);
+                    })),
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("2000"),
+                    onPressed: () {
+                      _setAmount(2000);
+                    })),
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("1000"),
+                    onPressed: () {
+                      _setAmount(1000);
+                    })),
           ],
         ),
-      ),
+        Row(
+          children: [
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("500"),
+                    onPressed: () {
+                      _setAmount(500);
+                    })),
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("100"),
+                    onPressed: () {
+                      _setAmount(100);
+                    })),
+            Expanded(
+                child: TextButton(
+                    style: buttonStyle(),
+                    child: const Text("50"),
+                    onPressed: () {
+                      _setAmount(50);
+                    })),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: TextButton(
+                    style: buttonStyleColored(Colors.red),
+                    child: const Text("-"),
+                    onPressed: () {
+                      subdivide = true;
+                      _editPlayer1Life();
+                    })),
+            Expanded(
+                child: Center(
+              child: Text('$_selectedAmount'),
+            )),
+            Expanded(
+                child: TextButton(
+                    style: buttonStyleColored(Colors.green),
+                    child: const Text("+"),
+                    onPressed: () {
+                      subdivide = false;
+                      _editPlayer1Life();
+                    })),
+          ],
+        ),
+      ],
     );
   }
 
@@ -147,7 +133,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
       foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
       backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.hovered))
             return Colors.blue.withOpacity(0.04);
           if (states.contains(MaterialState.focused) ||
@@ -170,7 +156,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
       foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
       backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.hovered))
             return Colors.blue.withOpacity(0.04);
           if (states.contains(MaterialState.focused) ||

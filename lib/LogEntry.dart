@@ -6,8 +6,8 @@ class LogEntry {
   int enemyHealth = 0;
   bool isMe = true;
   Color color = Color(0xffb74093);
-  Color positiveColor = Color(0xff366e3b);
-  Color negativeColor = Color(0xff6e3636);
+  Color positiveColor = Colors.green;
+  Color negativeColor = Colors.green;
 
   LogEntry(int value, int meHealth, int enemyHealth, bool isMe) {
     this.value = value;
@@ -19,6 +19,9 @@ class LogEntry {
 
   String getMeText() {
     if (isMe) {
+      if (value > 0) {
+        return '+$value';
+      }
       return '$value';
     } else {
       return "";
@@ -27,6 +30,9 @@ class LogEntry {
 
   String getEnemyText() {
     if (!isMe) {
+      if (value > 0) {
+        return '+$value';
+      }
       return '$value';
     } else {
       return "";

@@ -54,7 +54,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                           style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple,
+                            color: PURPLE,
                           ),
                         ),
                         Text(
@@ -62,7 +62,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
-                            color: Colors.orange,
+                            color: ORANGE,
                           ),
                         ),
                       ],
@@ -85,7 +85,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                                 minHeight: 20,
                                 value: vm.health1 / vm.maxHealth,
                                 valueColor: const AlwaysStoppedAnimation<Color>(
-                                    Colors.purple),
+                                    PURPLE),
                               ),
                             ),
                           ),
@@ -105,7 +105,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                                   minHeight: 20,
                                   value: vm.health2 / vm.maxHealth,
                                   valueColor: const AlwaysStoppedAnimation(
-                                      Colors.orange),
+                                      ORANGE),
                                 ),
                               ),
                             ),
@@ -120,14 +120,14 @@ class _LandscapeOne extends State<LandscapeOne> {
                         children: [
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: Colors.purple, target: 1)),
+                                  vm: vm, color: PURPLE, target: 1)),
                           const SizedBox(
                             width: 100,
                             child: Center(child: Text("Log or so")),
                           ),
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: Colors.orange, target: 2)),
+                                  vm: vm, color: ORANGE, target: 2)),
                         ],
                       )),
                 ],

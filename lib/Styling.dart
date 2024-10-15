@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
- class Styling {
+const PURPLE = Color(0xff6432cd);
+const ORANGE = Color(0xffe99f16); //ff prefix for alpha?
 
-   Styling();
+class Styling {
+  Styling();
 
-   static var styleA = ButtonStyle(
+  static var styleA = ButtonStyle(
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -14,7 +16,7 @@ import 'package:flutter/material.dart';
     foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
     overlayColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      (Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered))
           return Colors.blue.withOpacity(0.04);
         if (states.contains(MaterialState.focused) ||
@@ -25,7 +27,7 @@ import 'package:flutter/material.dart';
     ),
   );
 
-   ButtonStyle defaultButtonStyle() {
-     return styleA;
-   }
+  ButtonStyle defaultButtonStyle() {
+    return styleA;
+  }
 }

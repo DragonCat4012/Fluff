@@ -60,34 +60,27 @@ class LogCard extends StatelessWidget {
     if (value == '') {
       child = SizedBox(
         width: minWidth,
-        child: Text(
-          value,
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Colors.black,
-          ),
-        ),
       );
     } else {
       child = SizedBox(
           width: minWidth,
           child: Container(
             decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.7,
-                ),
                 color: entry.color,
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontSize: 18.0,
-                color: Colors.black,
-              ),
-            ),
+            child:
+                Center (
+                  child:   Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+
           ));
     }
-    return Container(child: child);
+    return  Padding(padding: const EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 5.0), child: Container(child: child));
   }
 }

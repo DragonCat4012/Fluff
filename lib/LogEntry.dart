@@ -7,7 +7,7 @@ class LogEntry {
   bool isMe = true;
   Color color = Color(0xffb74093);
   Color positiveColor = Colors.green;
-  Color negativeColor = Colors.green;
+  Color negativeColor = Colors.red;
 
   LogEntry(int value, int meHealth, int enemyHealth, bool isMe) {
     this.value = value;

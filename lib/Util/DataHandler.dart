@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fluff/Util/Game.dart';
 import 'package:fluff/Util/LogEntry.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,6 +11,7 @@ class DataHandler {
   List<Game> games = List.empty();
 
   DataHandler(){
+    loadGames();
     print("init data");
     // TODO: use loaded data
     if (games.isEmpty) {
@@ -25,8 +28,15 @@ class DataHandler {
     fileHandler.writeCounter(2);
   }
 
-  void loadGames(){
-    // TODO: load file
+  void loadGames() async {
+
+    var y = await fileHandler.readFile();
+    var x = jsonDecode(y) as List<Game>;
+   /* var x = fileHandler.readFile().then((jsonString) => {
+         jsonDecode(jsonString) as List<Game>
+    });*/
+    print("aaaaa");
+    print(x);
   }
 }
 
@@ -35,7 +45,6 @@ class FileHandler {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-
     return directory.path;
   }
 
@@ -46,22 +55,16 @@ class FileHandler {
 
   Future<File> writeCounter(int counter) async {
     final file = await _saveFile;
-
-    // Write the file
     return file.writeAsString('$counter');
   }
 
-  Future<int> readCounter() async {
+  Future<String> readFile() async {
     try {
       final file = await _saveFile;
-
-      // Read the file
       final contents = await file.readAsString();
-
-      return int.parse(contents);
+      return contents;
     } catch (e) {
-      // If encountering an error, return 0
-      return 0;
+      return "[]";
     }
   }
 }

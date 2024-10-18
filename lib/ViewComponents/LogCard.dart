@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluff/LogEntry.dart';
+import 'package:fluff/Util/LogEntry.dart';
 
 class LogCard extends StatelessWidget {
   final LogEntry entry;

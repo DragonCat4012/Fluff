@@ -1,4 +1,4 @@
-import 'package:fluff/LogEntry.dart';
+import 'package:fluff/Util/LogEntry.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 

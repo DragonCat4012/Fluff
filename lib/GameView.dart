@@ -1,6 +1,5 @@
-import 'package:fluff/ViewComponents/LogCard.dart';
 import 'package:flutter/material.dart';
-import 'package:fluff/LogEntry.dart';
+import 'package:fluff/Util/LogEntry.dart';
 import 'package:fluff/ViewComponents/LogView.dart';
 import 'Util/Styling.dart';
 

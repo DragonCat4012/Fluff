@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fluff/LogEntry.dart';
+import 'package:fluff/Util/LogEntry.dart';
 import 'package:fluff/ViewComponents/LogView.dart';
 
 import '../Util/Styling.dart';

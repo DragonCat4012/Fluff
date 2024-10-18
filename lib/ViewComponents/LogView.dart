@@ -1,6 +1,6 @@
 import 'LogCard.dart';
 import 'package:flutter/material.dart';
-import 'package:fluff/LogEntry.dart';
+import 'package:fluff/Util/LogEntry.dart';
 
 class LogPage extends StatefulWidget {
    const LogPage({super.key, required this.title, required this.logEntries});
@@ -24,8 +24,6 @@ class _LogPageState extends State<LogPage> {
                 padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
     children: widget.logEntries.map((entry) => LogCard(entry)).toList(),
     ),
-
-
     );
   }
 }

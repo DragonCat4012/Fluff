@@ -5,8 +5,15 @@ import 'Util/Styling.dart';
 import 'GameViews/PortraitView.dart';
 import 'GameViews/LandscapeOne.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeView();
+}
+
+class _HomeView extends State<HomeView> {
+  final DataHandler storage = DataHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +115,7 @@ class HomeView extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    LandscapeOne(title: "Game")),
+                                    LandscapeOne(title: "Game", storage: storage,)),
                           );
                         },
                         child: Text("Landscape 1"),

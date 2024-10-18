@@ -1,3 +1,4 @@
+import 'package:fluff/Util/DataHandler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,8 +8,9 @@ import '../ViewComponents/LifepointsOptionsView.dart';
 import '../Util/Styling.dart';
 
 class LandscapeOne extends StatefulWidget {
-  const LandscapeOne({super.key, required this.title});
+  const LandscapeOne({super.key, required this.title, required this.storage});
   final String title;
+  final DataHandler storage;
 
   @override
   State<LandscapeOne> createState() => _LandscapeOne();
@@ -118,14 +120,14 @@ class _LandscapeOne extends State<LandscapeOne> {
                         children: [
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: PURPLE, target: 1)),
+                                  vm: vm, color: PURPLE, target: 1, storage: widget.storage)),
                           const SizedBox(
                             width: 100,
                             child: Center(child: Text("Log or so")),
                           ),
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: ORANGE, target: 2)),
+                                  vm: vm, color: ORANGE, target: 2, storage: widget.storage)),
                         ],
                       )),
                 ],

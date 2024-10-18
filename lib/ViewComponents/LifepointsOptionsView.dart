@@ -1,3 +1,5 @@
+import 'package:fluff/Util/DataHandler.dart';
+import 'package:fluff/Util/LogEntry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,10 +8,11 @@ import '../Util/Styling.dart';
 
 class LifePointOptionsView extends StatefulWidget {
   const LifePointOptionsView(
-      {super.key, required this.vm, required this.color, required this.target});
+      {super.key, required this.vm, required this.color, required this.target, required this.storage});
   final GameViewModel vm;
   final Color color;
   final int target;
+  final DataHandler storage;
 
   @override
   State<LifePointOptionsView> createState() => _LifePointOptionsView();
@@ -24,6 +27,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
 
     setState(() {
       widget.vm.edit_health(widget.target, amount);
+      widget.storage.addLogEntryToGame(new LogEntry(amount, widget.vm.health1 , widget.vm.health2, widget.target == 1));
     });
   }
 

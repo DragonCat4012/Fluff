@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fluff/LogEntry.dart';
-import 'package:fluff/LogView.dart';
-import 'GameViewModel.dart';
-import 'LifepointsOptionsView.dart';
+import '../GameViewModel.dart';
+import '../ViewComponents/LifepointsOptionsView.dart';
 
-import 'Styling.dart';
+import '../Util/Styling.dart';
 
 class LandscapeOne extends StatefulWidget {
   const LandscapeOne({super.key, required this.title});

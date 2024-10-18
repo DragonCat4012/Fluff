@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'GameView.dart';
-import 'Styling.dart';
-import 'PortraitView.dart';
-import 'LandscapeOne.dart';
+import 'Util/Styling.dart';
+import 'GameViews/PortraitView.dart';
+import 'GameViews/LandscapeOne.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

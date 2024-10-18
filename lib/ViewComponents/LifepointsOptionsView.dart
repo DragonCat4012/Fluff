@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fluff/LogEntry.dart';
-import 'package:fluff/LogView.dart';
-import 'GameViewModel.dart';
-
-import 'Styling.dart';
+import '../GameViewModel.dart';
+import '../Util/Styling.dart';
 
 class LifePointOptionsView extends StatefulWidget {
   const LifePointOptionsView(

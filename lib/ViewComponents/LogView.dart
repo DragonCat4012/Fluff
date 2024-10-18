@@ -1,4 +1,4 @@
-import 'package:fluff/LogCard.dart';
+import 'LogCard.dart';
 import 'package:flutter/material.dart';
 import 'package:fluff/LogEntry.dart';
 

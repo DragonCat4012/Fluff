@@ -17,10 +17,7 @@ class LandscapeOne extends StatefulWidget {
 }
 
 class _LandscapeOne extends State<LandscapeOne> {
-  final _logList = [];
-
   static const double barRadius = 8;
-
   var vm = GameViewModel(8000);
 
   @override
@@ -84,8 +81,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                               child: LinearProgressIndicator(
                                 minHeight: 20,
                                 value: vm.health1 / vm.maxHealth,
-                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                    PURPLE),
+                                valueColor:
+                                    const AlwaysStoppedAnimation<Color>(PURPLE),
                               ),
                             ),
                           ),
@@ -104,8 +101,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                                 child: LinearProgressIndicator(
                                   minHeight: 20,
                                   value: vm.health2 / vm.maxHealth,
-                                  valueColor: const AlwaysStoppedAnimation(
-                                      ORANGE),
+                                  valueColor:
+                                      const AlwaysStoppedAnimation(ORANGE),
                                 ),
                               ),
                             ),
@@ -120,14 +117,20 @@ class _LandscapeOne extends State<LandscapeOne> {
                         children: [
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: PURPLE, target: 1, storage: widget.storage)),
+                                  vm: vm,
+                                  color: PURPLE,
+                                  target: 1,
+                                  storage: widget.storage)),
                           const SizedBox(
                             width: 100,
                             child: Center(child: Text("Log or so")),
                           ),
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm, color: ORANGE, target: 2, storage: widget.storage)),
+                                  vm: vm,
+                                  color: ORANGE,
+                                  target: 2,
+                                  storage: widget.storage)),
                         ],
                       )),
                 ],

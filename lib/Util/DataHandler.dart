@@ -10,7 +10,7 @@ class DataHandler {
   Game currentGame = Game();
   List<Game> games = List.empty();
 
-  DataHandler(){
+  DataHandler() {
     loadGames();
 
     // TODO: use loaded data
@@ -40,7 +40,7 @@ class DataHandler {
     var y = await fileHandler.readFile();
     print("filecontent: ${y}");
     Iterable l = json.decode(y);
-    List<Game> x = List<Game>.from(l.map((model)=> Game.fromJson(model)));
+    List<Game> x = List<Game>.from(l.map((model) => Game.fromJson(model)));
 
     print("aaaaa");
     print(x);
@@ -65,7 +65,9 @@ class FileHandler {
     final file = await _saveFile;
     List<String> gameList = [];
 
-    games.forEach((element) {gameList.add(element.toJson());});
+    games.forEach((element) {
+      gameList.add(element.toJson());
+    });
     print(gameList);
     return file.writeAsString('$gameList');
   }

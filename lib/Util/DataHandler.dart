@@ -12,36 +12,43 @@ class DataHandler {
 
   DataHandler(){
     loadGames();
-    print("init data");
+
     // TODO: use loaded data
     if (games.isEmpty) {
       currentGame = Game();
-      games= [...games, currentGame];
+      games = [...games, currentGame];
+
+      fileHandler.writeGames(games);
     } else {
       currentGame = games.first;
     }
+
+    print("init data: ${games.length} games");
+    print(currentGame);
   }
 
   void addLogEntryToGame(LogEntry entry) {
     currentGame.addEntry(entry);
-    // TODO: write into file
-    fileHandler.writeCounter(2);
+
+    games.removeWhere((item) => item.game_uuid == currentGame.game_uuid);
+    games.add(currentGame);
+
+    fileHandler.writeGames(games);
   }
 
   void loadGames() async {
-
     var y = await fileHandler.readFile();
-    var x = jsonDecode(y) as List<Game>;
-   /* var x = fileHandler.readFile().then((jsonString) => {
-         jsonDecode(jsonString) as List<Game>
-    });*/
+    print("filecontent: ${y}");
+    Iterable l = json.decode(y);
+    List<Game> x = List<Game>.from(l.map((model)=> Game.fromJson(model)));
+
     print("aaaaa");
     print(x);
   }
 }
 
 class FileHandler {
-  String savePath = "save.txt";
+  String savePath = "gameSave.txt";
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -53,9 +60,14 @@ class FileHandler {
     return File('$path/$savePath');
   }
 
-  Future<File> writeCounter(int counter) async {
+  Future<File> writeGames(games) async {
+    print("Save games: ${games.length}");
     final file = await _saveFile;
-    return file.writeAsString('$counter');
+    List<String> gameList = [];
+
+    games.forEach((element) {gameList.add(element.toJson());});
+    print(gameList);
+    return file.writeAsString('$gameList');
   }
 
   Future<String> readFile() async {

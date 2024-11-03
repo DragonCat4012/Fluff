@@ -46,4 +46,15 @@ class LogEntry {
   String toJson() {
     return '{"meHealth": $meHealth, "enemyHealth": $enemyHealth, "value": $value, "isMe": $isMe}';
   }
+
+  static LogEntry fromJson(model) {
+    LogEntry newLog = LogEntry(model["value"],model["meHealth"],model["enemyHealth"],model["isMe"]);
+    print("load log from JSON: $newLog");
+    return newLog;
+  }
+
+  @override
+  String toString() {
+    return "($value -> $meHealth [$isMe] | $enemyHealth)";
+  }
 }

@@ -16,6 +16,12 @@ class _HomeView extends State<HomeView> {
   final DataHandler storage = DataHandler();
 
   @override
+  void initState() {
+    super.initState();
+    storage.loadGames();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

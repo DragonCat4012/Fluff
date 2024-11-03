@@ -10,23 +10,8 @@ class DataHandler {
   Game currentGame = Game();
   List<Game> games = List.empty();
 
-  DataHandler() {
-    loadGames();
+  DataHandler() {}
 
-    // TODO: use loaded data
-    if (games.isEmpty) {
-      print("no games could be loaded");
-      currentGame = Game();
-      games = [...games, currentGame];
-
-      fileHandler.writeGames(games);
-    } else {
-      currentGame = games.first;
-    }
-
-    print("init data: ${games.length} games");
-    print(currentGame);
-  }
 
   void addLogEntryToGame(LogEntry entry) {
     currentGame.addEntry(entry);
@@ -41,9 +26,24 @@ class DataHandler {
     var filecontent = await fileHandler.readFile();
     print("filecontent: ${filecontent}");
     Iterable l = json.decode(filecontent);
-    List<Game> loadedGames = List<Game>.from(l.map((model) => Game.fromJson(model)));
+    List<Game> loadedGames =
+        List<Game>.from(l.map((model) => Game.fromJson(model)));
     games = loadedGames;
     print("Loaded Games: ${loadedGames.length}");
+
+    // setup Class
+    if (games.isEmpty) {
+      print("no games could be loaded");
+      currentGame = Game();
+      games = [...games, currentGame];
+
+      fileHandler.writeGames(games);
+    } else {
+      currentGame = games.first;
+    }
+
+    print("init data: ${games.length} games");
+    print(currentGame);
   }
 }
 

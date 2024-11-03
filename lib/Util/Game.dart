@@ -27,11 +27,12 @@ class Game {
     return '{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
   }
 
-  static Game fromJson(model) {
+  static Game fromJson( model) {
+    print("model $model");
     List<LogEntry> newLog = [];
     print("a ${model["log"]}");
     model["log"].forEach((element) {
-      newLog.add(element.fromJson());
+      newLog.add(LogEntry.fromJson(element));
     });
 
     Game newGame = Game.fromParam(newLog, model["game_uuid"]);

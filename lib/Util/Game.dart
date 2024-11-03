@@ -12,4 +12,11 @@ class Game {
      log = [entry, ...log];
      print("Add entry: ${log.length}");
    }
+
+   String toJson() {
+     List<String> entries = List.empty();
+     log.forEach((element) {entries.add(element.toJson());});
+
+     return '{uid: "xxx", log: [${entries.join(", ")}]}';
+   }
 }

@@ -42,4 +42,8 @@ class LogEntry {
   Color getColor() {
     return value > 0 ? positiveColor : negativeColor;
   }
+
+  String toJson() {
+    return '{meHealth: ${meHealth}, enemyHealth: ${enemyHealth}, value: ${value}, isMe: ${isMe}}';
+  }
 }

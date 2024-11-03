@@ -44,6 +44,6 @@ class LogEntry {
   }
 
   String toJson() {
-    return '{meHealth: ${meHealth}, enemyHealth: ${enemyHealth}, value: ${value}, isMe: ${isMe}}';
+    return '{"meHealth": $meHealth, "enemyHealth": $enemyHealth, "value": $value, "isMe": $isMe}';
   }
 }

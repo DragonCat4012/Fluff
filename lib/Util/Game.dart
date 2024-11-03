@@ -2,11 +2,11 @@ import 'package:uuid/uuid.dart';
 import 'package:fluff/Util/LogEntry.dart';
 
 class Game {
-   List<LogEntry> log = List.empty();
+   List<LogEntry> log = [];
    String game_uuid = "";
 
    Game(){
-     log = List.empty();
+     log = [];
      const uuid = Uuid();
      game_uuid = uuid.v1().toString();
    }
@@ -20,13 +20,16 @@ class Game {
    }
 
    String toJson() {
-     List<String> entries = List.empty();
+     List<String> entries = [];
      log.forEach((element) {entries.add(element.toJson());});
-     return '{uuid: $game_uuid, log: [${entries.join(", ")}]}';
+     return '{"uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
    }
 
    static Game fromJson(model) {
-     return Game.fromParam(model["game_uuid"], model["log"]);
+    //model["log"]
+     print("help:");
+     print(Game.fromParam(List.empty(), model["game_uuid"]));
+     return Game.fromParam(List.empty(), model["game_uuid"]);
    }
 
    @override

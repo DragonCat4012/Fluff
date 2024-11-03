@@ -14,11 +14,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeView extends State<HomeView> {
   final DataHandler storage = DataHandler();
+  String currentGame = "";
 
   @override
   void initState() {
     super.initState();
     storage.loadGames();
+    currentGame = storage.currentGame.game_uuid;
   }
 
   @override
@@ -39,6 +41,12 @@ class _HomeView extends State<HomeView> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
+                    Center(
+                      child: Text(
+                        currentGame,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
                     SizedBox(
                       width: double.infinity,
                       child: TextButton(
@@ -55,16 +63,14 @@ class _HomeView extends State<HomeView> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage(title: "UwU")),
-                          );
-                        },
-                        child: Text("New Game"),
+                      child: TextButton.icon(
                         style: Styling().defaultButtonStyle(),
+                        icon: const Icon(Icons.add),
+                        onPressed: () {
+                          storage.createNewGame();
+                          currentGame = storage.currentGame.game_uuid;
+                        },
+                        label: const Text('New Game'),
                       ),
                     ),
                     SizedBox(
@@ -120,8 +126,10 @@ class _HomeView extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    LandscapeOne(title: "Game", storage: storage,)),
+                                builder: (context) => LandscapeOne(
+                                      title: "Game",
+                                      storage: storage,
+                                    )),
                           );
                         },
                         child: Text("Landscape 1"),
@@ -133,5 +141,4 @@ class _HomeView extends State<HomeView> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
 }

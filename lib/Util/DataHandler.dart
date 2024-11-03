@@ -12,16 +12,6 @@ class DataHandler {
 
   DataHandler() {}
 
-
-  void addLogEntryToGame(LogEntry entry) {
-    currentGame.addEntry(entry);
-
-    games.removeWhere((item) => item.game_uuid == currentGame.game_uuid);
-    games.add(currentGame);
-
-    fileHandler.writeGames(games);
-  }
-
   void loadGames() async {
     var filecontent = await fileHandler.readFile();
     print("filecontent: ${filecontent}");
@@ -44,6 +34,22 @@ class DataHandler {
 
     print("init data: ${games.length} games");
     print(currentGame);
+  }
+
+  void addLogEntryToGame(LogEntry entry) {
+    currentGame.addEntry(entry);
+
+    games.removeWhere((item) => item.game_uuid == currentGame.game_uuid);
+    games.add(currentGame);
+
+    fileHandler.writeGames(games); // TODO:; check if needs to be called
+  }
+
+  void createNewGame() {
+    currentGame = Game();
+    games.add(currentGame);
+    print("new game: ${currentGame.game_uuid}");
+    fileHandler.writeGames(games);
   }
 }
 

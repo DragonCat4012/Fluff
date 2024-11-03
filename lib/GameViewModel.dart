@@ -1,4 +1,3 @@
-import 'package:fluff/Util/DataHandler.dart';
 import 'package:flutter/cupertino.dart';
 
 class GameViewModel extends ChangeNotifier {
@@ -20,7 +19,6 @@ class GameViewModel extends ChangeNotifier {
   String get_health2() {
     return health2.toString();
   }
-
 
   edit_health(int _player, int _value) {
     if (_player == 1) {

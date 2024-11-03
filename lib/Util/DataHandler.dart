@@ -15,6 +15,7 @@ class DataHandler {
 
     // TODO: use loaded data
     if (games.isEmpty) {
+      print("no games could be loaded");
       currentGame = Game();
       games = [...games, currentGame];
 
@@ -37,13 +38,12 @@ class DataHandler {
   }
 
   void loadGames() async {
-    var y = await fileHandler.readFile();
-    print("filecontent: ${y}");
-    Iterable l = json.decode(y);
-    List<Game> x = List<Game>.from(l.map((model) => Game.fromJson(model)));
-
-    print("aaaaa");
-    print(x);
+    var filecontent = await fileHandler.readFile();
+    print("filecontent: ${filecontent}");
+    Iterable l = json.decode(filecontent);
+    List<Game> loadedGames = List<Game>.from(l.map((model) => Game.fromJson(model)));
+    games = loadedGames;
+    print("Loaded Games: ${loadedGames.length}");
   }
 }
 

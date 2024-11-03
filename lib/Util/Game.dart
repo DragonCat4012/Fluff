@@ -23,6 +23,7 @@ class Game {
     log.forEach((element) {
       entries.add(element.toJson());
     });
+    print("game to json: ${'{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}'}");
     return '{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
   }
 

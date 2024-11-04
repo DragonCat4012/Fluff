@@ -30,7 +30,6 @@ class Game {
   static Game fromJson( model) {
     print("model $model");
     List<LogEntry> newLog = [];
-    print("a ${model["log"]}");
     model["log"].forEach((element) {
       newLog.add(LogEntry.fromJson(element));
     });

@@ -1,3 +1,4 @@
+import 'package:fluff/GamesView.dart';
 import 'package:fluff/Util/DataHandler.dart';
 import 'package:flutter/material.dart';
 import 'GameView.dart';
@@ -58,13 +59,13 @@ class _HomeView extends State<HomeView> {
                           );
                         },
                         child: Text("Load Game"),
-                        style: Styling().defaultButtonStyle(),
+                        style: Styling.defaultButtonStyle(),
                       ),
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: TextButton.icon(
-                        style: Styling().defaultButtonStyle(),
+                        style: Styling.defaultButtonStyle(),
                         icon: const Icon(Icons.add),
                         onPressed: () {
                           storage.createNewGame();
@@ -75,16 +76,19 @@ class _HomeView extends State<HomeView> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: TextButton(
+                      child: TextButton.icon(
+                        style: Styling.defaultButtonStyle(),
+                        icon: const Icon(Icons.folder_open),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyHomePage(title: "UwU")),
+                                builder: (context) => GamesView(
+                                      storage: storage,
+                                    )),
                           );
                         },
-                        child: Text("All Games"),
-                        style: Styling().defaultButtonStyle(),
+                        label: const Text('All Games'),
                       ),
                     ),
                     SizedBox(
@@ -97,11 +101,11 @@ class _HomeView extends State<HomeView> {
                                 builder: (context) => MyHomePage(title: "UwU")),
                           );
                         },
-                        child: Text("Logs"),
-                        style: Styling().defaultButtonStyle(),
+                        style: Styling.defaultButtonStyle(),
+                        child: const Text("Logs"),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     SizedBox(
@@ -115,8 +119,8 @@ class _HomeView extends State<HomeView> {
                                     PortraitView(title: "Game")),
                           );
                         },
-                        child: Text("Portrait"),
-                        style: Styling().defaultButtonStyle(),
+                        style: Styling.defaultButtonStyle(),
+                        child: const Text("Portrait"),
                       ),
                     ),
                     SizedBox(
@@ -132,8 +136,8 @@ class _HomeView extends State<HomeView> {
                                     )),
                           );
                         },
+                        style: Styling.defaultButtonStyle(),
                         child: Text("Landscape 1"),
-                        style: Styling().defaultButtonStyle(),
                       ),
                     ),
                   ],

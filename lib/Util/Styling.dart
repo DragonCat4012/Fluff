@@ -4,6 +4,9 @@ const PURPLE = Color(0xff6432cd);
 const ORANGE = Color(0xffe99f16); //ff prefix for alpha?
 
 class Styling {
+  static const accent = PURPLE;
+  static const secondary = PURPLE;
+
   Styling();
 
   static var styleA = ButtonStyle(
@@ -27,7 +30,7 @@ class Styling {
     ),
   );
 
-  ButtonStyle defaultButtonStyle() {
+  static ButtonStyle defaultButtonStyle() {
     return styleA;
   }
 }

@@ -1,6 +1,6 @@
 # Fluff
 
-Yu-Gi-Oh Health Tracker
+Yu-Gi-Oh Health Tracker written in Flutter
 
 ## Showcase
 <img src="https://kiarar.moe/images/fluff/fluff_1.jpg" width="200">
@@ -9,4 +9,9 @@ Yu-Gi-Oh Health Tracker
 
 ## Features
 * track your and your enemies health
-* log history
+* log history for each game
+* portrait & landscape mode
+
+## Dependencies
+* path_provider: ^2.1.4
+* uuid: ^3.0.6

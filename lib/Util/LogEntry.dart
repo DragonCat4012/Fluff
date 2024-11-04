@@ -9,12 +9,8 @@ class LogEntry {
   Color positiveColor = Colors.green;
   Color negativeColor = Colors.red;
 
-  LogEntry(int value, int meHealth, int enemyHealth, bool isMe) {
-    this.value = value;
-    this.meHealth = meHealth;
-    this.enemyHealth = enemyHealth;
-    this.isMe = isMe;
-    this.color = value > 0 ? positiveColor : negativeColor;
+  LogEntry(this.value, this.meHealth, this.enemyHealth, this.isMe) {
+    color = value > 0 ? positiveColor : negativeColor;
   }
 
   String getMeText() {

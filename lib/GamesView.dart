@@ -31,7 +31,12 @@ class _GamesView extends State<GamesView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(games[i].game_uuid, style: TextStyle(color: getTextcolorForGame(games[i].game_uuid, logSize)),),
+                  Text(
+                    games[i].game_uuid,
+                    style: TextStyle(
+                        color:
+                            getTextColorForGame(games[i].game_uuid, logSize)),
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
@@ -41,13 +46,13 @@ class _GamesView extends State<GamesView> {
         ),
       );
     }
-    return new Column(children: list);
+    return Column(children: list);
   }
 
-  Color getTextcolorForGame(String gameUUID, int size) {
+  Color getTextColorForGame(String gameUUID, int size) {
     if (gameUUID == widget.storage.currentGame.game_uuid) {
       return Styling.accent;
-    } else if(size > 0) {
+    } else if (size > 0) {
       return Styling.secondary;
     } else {
       return Colors.grey;
@@ -70,7 +75,7 @@ class _GamesView extends State<GamesView> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("All Games"),
+        title: const Text("All Games"),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -81,7 +86,7 @@ class _GamesView extends State<GamesView> {
                     Center(
                       child: Text(
                         currentGame,
-                        style: TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.grey),
                       ),
                     ),
                     getTextWidgets(widget.storage.games),

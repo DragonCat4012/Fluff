@@ -34,7 +34,7 @@ class _HomeView extends State<HomeView> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Home"),
+        title: const Text("Home"),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -45,7 +45,7 @@ class _HomeView extends State<HomeView> {
                     Center(
                       child: Text(
                         currentGame,
-                        style: TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.grey),
                       ),
                     ),
                     SizedBox(
@@ -55,11 +55,12 @@ class _HomeView extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyHomePage(title: "UwU")),
+                                builder: (context) =>
+                                    const MyHomePage(title: "UwU")),
                           );
                         },
-                        child: Text("Load Game"),
                         style: Styling.defaultButtonStyle(),
+                        child: const Text("Load Game"),
                       ),
                     ),
                     SizedBox(
@@ -98,7 +99,8 @@ class _HomeView extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyHomePage(title: "UwU")),
+                                builder: (context) =>
+                                    const MyHomePage(title: "UwU")),
                           );
                         },
                         style: Styling.defaultButtonStyle(),
@@ -116,7 +118,7 @@ class _HomeView extends State<HomeView> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    PortraitView(title: "Game")),
+                                    const PortraitView(title: "Game")),
                           );
                         },
                         style: Styling.defaultButtonStyle(),
@@ -137,12 +139,12 @@ class _HomeView extends State<HomeView> {
                           );
                         },
                         style: Styling.defaultButtonStyle(),
-                        child: Text("Landscape 1"),
+                        child: const Text("Landscape 1"),
                       ),
                     ),
                   ],
                 ))),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

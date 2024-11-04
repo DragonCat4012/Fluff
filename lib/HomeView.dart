@@ -17,6 +17,12 @@ class _HomeView extends State<HomeView> {
   final DataHandler storage = DataHandler();
   String currentGame = "";
 
+  void newGame() async {
+    storage.createNewGame();
+    await Future.delayed(Duration(seconds: 1));
+    currentGame = storage.currentGame.game_uuid;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -68,9 +74,8 @@ class _HomeView extends State<HomeView> {
                       child: TextButton.icon(
                         style: Styling.defaultButtonStyle(),
                         icon: const Icon(Icons.add),
-                        onPressed: () {
-                          storage.createNewGame();
-                          currentGame = storage.currentGame.game_uuid;
+                        onPressed: ()  {
+                          newGame();
                         },
                         label: const Text('New Game'),
                       ),

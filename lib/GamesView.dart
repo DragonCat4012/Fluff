@@ -28,20 +28,30 @@ class _GamesView extends State<GamesView> {
               onPressed: () {
                 print(games[i].game_uuid);
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    games[i].game_uuid,
-                    style: TextStyle(
-                        color:
-                            getTextColorForGame(games[i].game_uuid, logSize)),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(logSize.toString())
-                ],
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            LogPage(title: "UwU", logEntries: games[i].log)),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      games[i].game_uuid,
+                      style: TextStyle(
+                          color:
+                              getTextColorForGame(games[i].game_uuid, logSize)),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(logSize.toString())
+                  ],
+                ),
               )),
         ),
       );

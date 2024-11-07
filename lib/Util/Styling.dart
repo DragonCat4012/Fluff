@@ -30,7 +30,32 @@ class Styling {
     ),
   );
 
+  static var styleADisabled = ButtonStyle(
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(width: 1, color: Colors.grey),
+      ),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+    overlayColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered))
+          return Colors.blue.withOpacity(0.04);
+        if (states.contains(MaterialState.focused) ||
+            states.contains(MaterialState.pressed))
+          return Colors.blue.withOpacity(0.12);
+        return null; // Defer to the widget's default.
+      },
+    ),
+  );
+
   static ButtonStyle defaultButtonStyle() {
     return styleA;
+  }
+
+  static ButtonStyle defaultButtonStyleDisabled() {
+    return styleADisabled;
   }
 }

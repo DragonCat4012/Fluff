@@ -1,7 +1,7 @@
 import 'package:fluff/Util/DataHandler.dart';
 import 'package:fluff/Util/Game.dart';
+import 'package:fluff/ViewComponents/LogView.dart';
 import 'package:flutter/material.dart';
-import 'GameView.dart';
 import 'Util/Styling.dart';
 
 class GamesView extends StatefulWidget {
@@ -22,21 +22,17 @@ class _GamesView extends State<GamesView> {
 
       list.add(
         SizedBox(
-          width: double.infinity,
-          child: TextButton(
-              style: Styling.defaultButtonStyle(),
-              onPressed: () {
-                print(games[i].game_uuid);
-              },
+            width: double.infinity,
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            LogPage(title: "UwU", logEntries: games[i].log)),
-                  );
-                },
+                style: games[i].log.isEmpty
+                    ? Styling.defaultButtonStyleDisabled()
+                    : Styling.defaultButtonStyle(),
+                onPressed: games[i].log.isEmpty
+                    ? null
+                    : () => navigateToLog(games[i].log),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -49,11 +45,13 @@ class _GamesView extends State<GamesView> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(logSize.toString())
+                    Text(
+                      logSize.toString(),
+                    )
                   ],
                 ),
-              )),
-        ),
+              ),
+            )),
       );
     }
     return Column(children: list);
@@ -69,6 +67,14 @@ class _GamesView extends State<GamesView> {
     }
   }
 
+  void navigateToLog(logs) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => LogPage(title: "Log", logEntries: logs)),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -79,12 +85,7 @@ class _GamesView extends State<GamesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: const Text("All Games"),
       ),
       body: Center(
@@ -102,7 +103,7 @@ class _GamesView extends State<GamesView> {
                     getTextWidgets(widget.storage.games),
                   ],
                 ))),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

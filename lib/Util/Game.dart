@@ -23,19 +23,19 @@ class Game {
     log.forEach((element) {
       entries.add(element.toJson());
     });
-    print("game to json: ${'{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}'}");
+   // print("game to json: ${'{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}'}");
     return '{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
   }
 
   static Game fromJson( model) {
-    print("model $model");
+   // print("model $model");
     List<LogEntry> newLog = [];
     model["log"].forEach((element) {
       newLog.add(LogEntry.fromJson(element));
     });
 
     Game newGame = Game.fromParam(newLog, model["game_uuid"]);
-    print("load Game from JSON: $newGame");
+    //print("load Game from JSON: $newGame");
     return newGame;
   }
 

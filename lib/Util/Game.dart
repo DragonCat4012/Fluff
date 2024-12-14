@@ -1,5 +1,5 @@
 import 'package:uuid/uuid.dart';
-import 'package:fluff/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 
 class Game {
   String game_uuid = "";
@@ -23,12 +23,12 @@ class Game {
     log.forEach((element) {
       entries.add(element.toJson());
     });
-   // print("game to json: ${'{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}'}");
+    // print("game to json: ${'{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}'}");
     return '{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
   }
 
-  static Game fromJson( model) {
-   // print("model $model");
+  static Game fromJson(model) {
+    // print("model $model");
     List<LogEntry> newLog = [];
     model["log"].forEach((element) {
       newLog.add(LogEntry.fromJson(element));

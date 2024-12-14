@@ -1,5 +1,5 @@
-import 'package:fluff/Util/DataHandler.dart';
-import 'package:fluff/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/Util/DataHandler.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +8,11 @@ import '../Util/Styling.dart';
 
 class LifePointOptionsView extends StatefulWidget {
   const LifePointOptionsView(
-      {super.key, required this.vm, required this.color, required this.target, required this.storage});
+      {super.key,
+      required this.vm,
+      required this.color,
+      required this.target,
+      required this.storage});
   final GameViewModel vm;
   final Color color;
   final int target;
@@ -27,7 +31,8 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
 
     setState(() {
       widget.vm.edit_health(widget.target, amount);
-      widget.storage.addLogEntryToGame(new LogEntry(amount, widget.vm.health1 , widget.vm.health2, widget.target == 1));
+      widget.storage.addLogEntryToGame(new LogEntry(
+          amount, widget.vm.health1, widget.vm.health2, widget.target == 1));
     });
   }
 
@@ -39,7 +44,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
 
   @override
   Widget build(BuildContext context) {
-    return  Expanded(child: buttonGroup(side: 1));
+    return Expanded(child: buttonGroup(side: 1));
   }
 
   Widget buttonGroup({int side = 0}) {

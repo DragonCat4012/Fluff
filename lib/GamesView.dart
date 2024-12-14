@@ -1,6 +1,6 @@
-import 'package:fluff/Util/DataHandler.dart';
-import 'package:fluff/Util/Game.dart';
-import 'package:fluff/ViewComponents/LogView.dart';
+import 'package:yugioh_health_tracker/Util/DataHandler.dart';
+import 'package:yugioh_health_tracker/Util/Game.dart';
+import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
 import 'package:flutter/material.dart';
 import 'Util/Styling.dart';
 

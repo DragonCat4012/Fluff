@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fluff/Util/LogEntry.dart';
-import 'package:fluff/ViewComponents/LogView.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
 
 import '../Util/Styling.dart';
 
@@ -119,24 +119,21 @@ class _PortraitView extends State<PortraitView> {
                 });
               },
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
                 RotatedBox(
                     quarterTurns: 3,
                     child: SizedBox(
                       width: 200,
                       height: 10,
-                      child:  LinearProgressIndicator(
+                      child: LinearProgressIndicator(
                         value: _health1 / _maxHealth,
                         valueColor: const AlwaysStoppedAnimation(Colors.orange),
                         backgroundColor: Colors.grey,
                         //  backgroundColor: Colors.lime,
                       ),
-                    )
-                ),
+                    )),
                 Text(
                   'Your health: $_health1',
                 ),
@@ -148,17 +145,14 @@ class _PortraitView extends State<PortraitView> {
                     child: SizedBox(
                       width: 200,
                       height: 10,
-                      child:  LinearProgressIndicator(
+                      child: LinearProgressIndicator(
                         value: _health2 / _maxHealth,
                         valueColor: const AlwaysStoppedAnimation(Colors.purple),
                         backgroundColor: Colors.grey,
                       ),
-                    )
-                ),
+                    )),
               ],
             ),
-
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -228,11 +222,13 @@ class _PortraitView extends State<PortraitView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:() {
+        onPressed: () {
           Navigator.push(
             context,
-
-            MaterialPageRoute(builder: (context) => LogPage(title:"UwU", logEntries: _logList.cast<LogEntry>().reversed.toList())),
+            MaterialPageRoute(
+                builder: (context) => LogPage(
+                    title: "UwU",
+                    logEntries: _logList.cast<LogEntry>().reversed.toList())),
           );
         },
         tooltip: 'Increment',

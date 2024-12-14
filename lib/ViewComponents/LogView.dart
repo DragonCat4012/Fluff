@@ -1,9 +1,9 @@
 import 'LogCard.dart';
 import 'package:flutter/material.dart';
-import 'package:fluff/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 
 class LogPage extends StatefulWidget {
-   const LogPage({super.key, required this.title, required this.logEntries});
+  const LogPage({super.key, required this.title, required this.logEntries});
   final String title;
   final List<LogEntry> logEntries;
 
@@ -12,18 +12,16 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Log'),
       ),
-      body:
-            ListView(
-                padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
-    children: widget.logEntries.map((entry) => LogCard(entry)).toList(),
-    ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
+        children: widget.logEntries.map((entry) => LogCard(entry)).toList(),
+      ),
     );
   }
 }

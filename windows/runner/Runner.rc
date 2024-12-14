@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "akora.com" "\0"
-            VALUE "FileDescription", "fluff" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "yugioh_health_tracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "fluff" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 akora.com. All rights reserved." "\0"
-            VALUE "OriginalFilename", "fluff.exe" "\0"
-            VALUE "ProductName", "fluff" "\0"
+            VALUE "InternalName", "yugioh_health_tracker" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "yugioh_health_tracker.exe" "\0"
+            VALUE "ProductName", "yugioh_health_tracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

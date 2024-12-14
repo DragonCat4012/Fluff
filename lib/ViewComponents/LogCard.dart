@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluff/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 
 class LogCard extends StatelessWidget {
   final LogEntry entry;
@@ -65,22 +65,21 @@ class LogCard extends StatelessWidget {
       child = SizedBox(
           width: minWidth,
           child: Container(
-            decoration: BoxDecoration(
-                color: entry.color,
-                borderRadius: const BorderRadius.all(Radius.circular(8))),
-            child:
-                Center (
-                  child:   Text(
-                    value,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.black,
-                    ),
+              decoration: BoxDecoration(
+                  color: entry.color,
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
+              child: Center(
+                child: Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.black,
                   ),
-                )
-
-          ));
+                ),
+              )));
     }
-    return  Padding(padding: const EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 5.0), child: Container(child: child));
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 5.0),
+        child: Container(child: child));
   }
 }

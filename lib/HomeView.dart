@@ -1,5 +1,5 @@
-import 'package:fluff/GamesView.dart';
-import 'package:fluff/Util/DataHandler.dart';
+import 'package:yugioh_health_tracker/GamesView.dart';
+import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:flutter/material.dart';
 import 'GameView.dart';
 import 'Util/Styling.dart';
@@ -27,9 +27,9 @@ class _HomeView extends State<HomeView> {
 
   @override
   void initState() {
-    storage.loadGames().then((value){
+    storage.loadGames().then((value) {
       currentGame = storage.currentGame.game_uuid;
-     // print('> Init View2: ${storage.currentGame.game_uuid}');
+      // print('> Init View2: ${storage.currentGame.game_uuid}');
     });
     super.initState();
   }
@@ -73,15 +73,15 @@ class _HomeView extends State<HomeView> {
                       child: TextButton.icon(
                         style: Styling.defaultButtonStyle(),
                         icon: const Icon(Icons.add),
-                        onPressed: ()  {
+                        onPressed: () {
                           newGame();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LandscapeOne(
-                                  title: "Game",
-                                  storage: storage,
-                                )),
+                                      title: "Game",
+                                      storage: storage,
+                                    )),
                           );
                         },
                         label: const Text('New Game'),

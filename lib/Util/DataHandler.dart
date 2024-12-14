@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:fluff/Util/Game.dart';
-import 'package:fluff/Util/LogEntry.dart';
+import 'package:yugioh_health_tracker/Util/Game.dart';
+import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 

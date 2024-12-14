@@ -5,7 +5,7 @@ const ORANGE = Color(0xffe99f16); //ff prefix for alpha?
 
 class Styling {
   static const accent = PURPLE;
-  static const secondary = PURPLE;
+  static const secondary = ORANGE;
 
   Styling();
 

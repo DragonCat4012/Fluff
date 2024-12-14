@@ -100,7 +100,7 @@ class _GamesView extends State<GamesView> {
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ),
-                    getTextWidgets(widget.storage.games),
+                    getTextWidgets(widget.storage.games.reversed.toList()),
                   ],
                 ))),
       ),

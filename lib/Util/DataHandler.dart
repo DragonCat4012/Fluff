@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fluff/Util/Game.dart';
 import 'package:fluff/Util/LogEntry.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,9 +11,8 @@ class DataHandler {
 
   DataHandler() {}
 
-  void loadGames() async {
+  Future<void> loadGames() async {
     var filecontent = await fileHandler.readFile();
-    print("filecontent: ${filecontent}");
     Iterable l = json.decode(filecontent);
     List<Game> loadedGames =
         List<Game>.from(l.map((model) => Game.fromJson(model)));
@@ -33,7 +31,7 @@ class DataHandler {
     }
 
     print("init data: ${games.length} games");
-    print(currentGame);
+    print("init cur: " + currentGame.game_uuid);
   }
 
   void addLogEntryToGame(LogEntry entry) {

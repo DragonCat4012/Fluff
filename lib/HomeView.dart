@@ -15,19 +15,23 @@ class HomeView extends StatefulWidget {
 
 class _HomeView extends State<HomeView> {
   final DataHandler storage = DataHandler();
-  String currentGame = "";
+  String currentGame = ""; // TODO: maybe remove
 
   void newGame() async {
     storage.createNewGame();
-    await Future.delayed(Duration(seconds: 1));
-    currentGame = storage.currentGame.game_uuid;
+
+    setState(() {
+      currentGame = storage.currentGame.game_uuid;
+    });
   }
 
   @override
   void initState() {
+    storage.loadGames().then((value){
+      currentGame = storage.currentGame.game_uuid;
+     // print('> Init View2: ${storage.currentGame.game_uuid}');
+    });
     super.initState();
-    storage.loadGames();
-    currentGame = storage.currentGame.game_uuid;
   }
 
   @override
@@ -50,7 +54,7 @@ class _HomeView extends State<HomeView> {
                   children: [
                     Center(
                       child: Text(
-                        currentGame,
+                        storage.currentGame.game_uuid,
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ),

@@ -27,7 +27,7 @@ class DataHandler {
 
       fileHandler.writeGames(games);
     } else {
-      currentGame = games.first;
+      currentGame = games.last;
     }
 
     print("init data: ${games.length} games");
@@ -72,7 +72,6 @@ class FileHandler {
     games.forEach((element) {
       gameList.add(element.toJson());
     });
-    print(gameList);
     return file.writeAsString('$gameList');
   }
 

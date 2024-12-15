@@ -11,6 +11,7 @@ Yu-Gi-Oh Health Tracker written in Flutter
 * track your and your enemies health
 * log history for each game
 * portrait & landscape mode
+* delete games or continue older Games
 
 ## Dependencies
 * path_provider: ^2.1.4

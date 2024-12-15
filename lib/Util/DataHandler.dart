@@ -57,6 +57,13 @@ class DataHandler {
     }
     fileHandler.writeGames(games);
   }
+
+  void switchCurrentGame(String newGameUUID) {
+      currentGame =  games.where((i) => i.game_uuid == newGameUUID).first;
+      // push currentGame to be the last
+      games.remove(currentGame);
+      games.add(currentGame);
+  }
 }
 
 class FileHandler {

@@ -28,7 +28,10 @@ class _GamesView extends State<GamesView> {
         Icons.star,
       ),
       onPressed: () {
-        // TODO: implement Star Option
+        widget.storage.switchCurrentGame(game.game_uuid);
+        setState(() { // reload view
+          toBeUpdated = !toBeUpdated;
+        });
       },
     );
   }
@@ -81,7 +84,6 @@ class _GamesView extends State<GamesView> {
                       },
                     ),
                     getStarWidget(games[i]),
-                    //     ElevatedButton(onPressed: () {}, child: Text("Log")),
                   ],
                 ),
               ),

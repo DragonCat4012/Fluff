@@ -23,8 +23,7 @@ class _PortraitView extends State<PortraitView> {
   bool shouldBeUpdated = false;
   bool _isPurpleSelected = true;
 
-
- @override
+  @override
   void initState() {
     super.initState();
     vm = GameViewModel.fromGame(8000, widget.storage.currentGame);
@@ -164,7 +163,10 @@ class _PortraitView extends State<PortraitView> {
                     child: const Text("Log"),
                   ),
                 ),
-                Text(widget.storage.currentGame.game_uuid),
+                Text(
+                  widget.storage.currentGame.game_uuid,
+                  style: const TextStyle(color: Colors.grey),
+                ),
               ],
             ),
           )),

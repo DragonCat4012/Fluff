@@ -2,6 +2,7 @@ import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
 import '../GameViewModel.dart';
 import '../ViewComponents/LifepointsOptionsView.dart';
 
@@ -54,6 +55,7 @@ class _LandscapeOne extends State<LandscapeOne> {
                             color: PURPLE,
                           ),
                         ),
+                        Text(widget.storage.currentGame.game_uuid),
                         Text(
                           '${vm.health2}',
                           style: const TextStyle(
@@ -121,9 +123,15 @@ class _LandscapeOne extends State<LandscapeOne> {
                                   color: PURPLE,
                                   target: 1,
                                   storage: widget.storage)),
-                          const SizedBox(
+                          SizedBox(
                             width: 100,
-                            child: Center(child: Text("Log or so")),
+                            child:
+                            ElevatedButton(
+                              child: const Text('Log'),
+                              onPressed: widget.storage.currentGame.log.isEmpty
+                                  ? null
+                                  : () => navigateToLog(widget.storage.currentGame.log),
+                            ),
                           ),
                           Expanded(
                               child: LifePointOptionsView(
@@ -137,6 +145,13 @@ class _LandscapeOne extends State<LandscapeOne> {
               ));
             }),
       ),
+    );
+  }
+  void navigateToLog(logs) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => LogPage(title: "Log", logEntries: widget.storage.currentGame.log)),
     );
   }
 }

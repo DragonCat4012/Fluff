@@ -1,7 +1,6 @@
 import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../GameViewModel.dart';
 import '../Util/Styling.dart';
@@ -31,7 +30,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
 
     setState(() {
       widget.vm.edit_health(widget.target, amount);
-      widget.storage.addLogEntryToGame(new LogEntry(
+      widget.storage.addLogEntryToGame(LogEntry(
           amount, widget.vm.health1, widget.vm.health2, widget.target == 1));
     });
   }

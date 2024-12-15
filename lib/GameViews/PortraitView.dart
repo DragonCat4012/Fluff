@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
 
 import '../GameViewModel.dart';
@@ -22,14 +21,24 @@ class PortraitView extends StatefulWidget {
 class _PortraitView extends State<PortraitView> {
   var vm = GameViewModel(8000);
   bool shouldBeUpdated = false;
-  bool _isMeSelected = true;
+  bool _isPurpleSelected = true;
+
+
+ @override
+  void initState() {
+    super.initState();
+    vm = GameViewModel.fromGame(8000, widget.storage.currentGame);
+    setState(() {
+      shouldBeUpdated = !shouldBeUpdated;
+    });
+  }
 
   Widget getLifepointsOptions() {
     Color color = Styling.accent;
-    int target = 2;
-    if (_isMeSelected) {
+    int target = 1;
+    if (!_isPurpleSelected) {
       color = Styling.secondary;
-      target = 1;
+      target = 2;
     }
     return LifePointOptionsView(
       vm: vm,
@@ -73,7 +82,7 @@ class _PortraitView extends State<PortraitView> {
                           child: LinearProgressIndicator(
                             value: vm.health1 / vm.maxHealth,
                             valueColor:
-                                const AlwaysStoppedAnimation(Styling.secondary),
+                                const AlwaysStoppedAnimation(Styling.accent),
                             backgroundColor: Colors.grey,
                             //  backgroundColor: Colors.lime,
                           ),
@@ -82,12 +91,12 @@ class _PortraitView extends State<PortraitView> {
                       children: [
                         Text('${vm.health1}',
                             style: const TextStyle(
-                                color: Styling.secondary,
+                                color: Styling.accent,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
                         Text('${vm.health2}',
                             style: const TextStyle(
-                                color: Styling.accent,
+                                color: Styling.secondary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
                       ],
@@ -100,7 +109,7 @@ class _PortraitView extends State<PortraitView> {
                           child: LinearProgressIndicator(
                             value: vm.health2 / vm.maxHealth,
                             valueColor:
-                                const AlwaysStoppedAnimation(Styling.accent),
+                                const AlwaysStoppedAnimation(Styling.secondary),
                             backgroundColor: Colors.grey,
                           ),
                         )),
@@ -110,16 +119,16 @@ class _PortraitView extends State<PortraitView> {
                   segments: const [
                     ButtonSegment(
                       value: true,
-                      label: Text("Orange"),
+                      label: Text("Purple"),
                       icon: Icon(null),
                     ),
                     ButtonSegment(
                       value: false,
-                      label: Text("Purple"),
+                      label: Text("Orange"),
                       icon: Icon(null),
                     )
                   ],
-                  selected: <bool>{_isMeSelected},
+                  selected: <bool>{_isPurpleSelected},
                   showSelectedIcon: false,
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -130,7 +139,7 @@ class _PortraitView extends State<PortraitView> {
                   ),
                   onSelectionChanged: (newSelection) {
                     setState(() {
-                      _isMeSelected = newSelection.first;
+                      _isPurpleSelected = newSelection.first;
                     });
                   },
                 ),

@@ -20,6 +20,16 @@ class LandscapeOne extends StatefulWidget {
 class _LandscapeOne extends State<LandscapeOne> {
   static const double barRadius = 8;
   var vm = GameViewModel(8000);
+  bool shouldBeUpdated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    vm = GameViewModel.fromGame(8000, widget.storage.currentGame);
+    setState(() {
+      shouldBeUpdated = !shouldBeUpdated;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

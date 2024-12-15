@@ -1,14 +1,27 @@
 import 'package:flutter/cupertino.dart';
 
+import 'Util/Game.dart';
+
 class GameViewModel extends ChangeNotifier {
-  int health1 = 8000; // me
-  int health2 = 8000; //oponnent
+  int health1 = 8000; // purple
+  int health2 = 8000; //orange
   int maxHealth = 8000;
 
   GameViewModel(health) {
     this.maxHealth = health;
     this.health1 = maxHealth;
     this.health2 = maxHealth;
+  }
+
+  GameViewModel.fromGame(int health, Game game ) {
+    this.maxHealth = health;
+    this.health1 = maxHealth;
+    this.health2 = maxHealth;
+
+    if(!game.log.isEmpty) {
+      this.health1 = game.log.first.meHealth;
+      this.health2 = game.log.first.enemyHealth;
+    }
   }
 
   //getter

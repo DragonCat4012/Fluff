@@ -4,65 +4,39 @@ import 'package:flutter/services.dart';
 import 'package:yugioh_health_tracker/Util/LogEntry.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
 
+import '../GameViewModel.dart';
+import '../Util/DataHandler.dart';
 import '../Util/Styling.dart';
+import '../ViewComponents/LifepointsOptionsView.dart';
 
 class PortraitView extends StatefulWidget {
-  const PortraitView({super.key, required this.title});
+  const PortraitView({super.key, required this.title, required this.storage});
 
   final String title;
+  final DataHandler storage;
 
   @override
   State<PortraitView> createState() => _PortraitView();
 }
 
 class _PortraitView extends State<PortraitView> {
-  int _counter = 0;
+  var vm = GameViewModel(8000);
   int _health1 = 8000; // me
   int _health2 = 8000; // opponent
   final int _maxHealth = 8000;
 
-  int _selectedAmount = 0;
-  bool _isNegative = false;
   bool _isMeSelected = true;
-  final _logList = [];
-
   String e = "";
 
-  void _selectAmount(int amount) {
-    setState(() {
-      _selectedAmount = amount;
-    });
-  }
-
-  void _selectPlayer(bool isMe) {
-    setState(() {
-      _isMeSelected = isMe;
-    });
-  }
-
-  void _editNegative(bool isNegative) {
-    setState(() {
-      _isNegative = isNegative;
-    });
-  }
-
-  void _editPlayer1Life() {
-    setState(() {
-      int amount = _isNegative ? -_selectedAmount : _selectedAmount;
-
-      if (_isMeSelected) {
-        _health1 += amount;
-      } else {
-        _health2 += amount;
-      }
-      _logList.add(new LogEntry(amount, _health1, _health2, _isMeSelected));
-    });
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Widget getLifepointsOptions() {
+    Color color = Styling.accent;
+    int target = 1;
+    if (_isMeSelected) {
+      color = Styling.secondary;
+      target = 2;
+    }
+    return LifePointOptionsView(
+        vm: vm, color: color, target: target, storage: widget.storage);
   }
 
   @override
@@ -74,157 +48,112 @@ class _PortraitView extends State<PortraitView> {
 
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'amount: $_selectedAmount',
-            ),
-            SegmentedButton(
-              segments: const [
-                ButtonSegment(
-                  value: true,
-                  label: Text("Me"),
-                  icon: Icon(null),
+      body: Container(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RotatedBox(
+                        quarterTurns: 3,
+                        child: SizedBox(
+                          width: 200,
+                          height: 10,
+                          child: LinearProgressIndicator(
+                            value: _health1 / _maxHealth,
+                            valueColor:
+                                const AlwaysStoppedAnimation(Styling.secondary),
+                            backgroundColor: Colors.grey,
+                            //  backgroundColor: Colors.lime,
+                          ),
+                        )),
+                    Column(
+                      children: [
+                        Text('$_health1',
+                            style: const TextStyle(
+                                color: Styling.secondary,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
+                        Text('$_health2',
+                            style: const TextStyle(
+                                color: Styling.accent,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    RotatedBox(
+                        quarterTurns: 3,
+                        child: SizedBox(
+                          width: 200,
+                          height: 10,
+                          child: LinearProgressIndicator(
+                            value: _health2 / _maxHealth,
+                            valueColor:
+                                const AlwaysStoppedAnimation(Styling.accent),
+                            backgroundColor: Colors.grey,
+                          ),
+                        )),
+                  ],
                 ),
-                ButtonSegment(
-                  value: false,
-                  label: Text("Enemy"),
-                  icon: Icon(null),
-                )
-              ],
-              selected: <bool>{_isMeSelected},
-              showSelectedIcon: false,
-              onSelectionChanged: (newSelection) {
-                setState(() {
-                  _isMeSelected = newSelection.first;
-                });
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RotatedBox(
-                    quarterTurns: 3,
-                    child: SizedBox(
-                      width: 200,
-                      height: 10,
-                      child: LinearProgressIndicator(
-                        value: _health1 / _maxHealth,
-                        valueColor: const AlwaysStoppedAnimation(Colors.orange),
-                        backgroundColor: Colors.grey,
-                        //  backgroundColor: Colors.lime,
+                SegmentedButton(
+                  segments: const [
+                    ButtonSegment(
+                      value: true,
+                      label: Text("Orange"),
+                      icon: Icon(null),
+                    ),
+                    ButtonSegment(
+                      value: false,
+                      label: Text("Purple"),
+                      icon: Icon(null),
+                    )
+                  ],
+                  selected: <bool>{_isMeSelected},
+                  showSelectedIcon: false,
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-                    )),
-                Text(
-                  'Your health: $_health1',
+                    ),
+                  ),
+                  onSelectionChanged: (newSelection) {
+                    setState(() {
+                      _isMeSelected = newSelection.first;
+                    });
+                  },
                 ),
-                Text(
-                  'Enemy health: $_health2',
+                getLifepointsOptions(),
+                const SizedBox(
+                  height: 20,
                 ),
-                RotatedBox(
-                    quarterTurns: 3,
-                    child: SizedBox(
-                      width: 200,
-                      height: 10,
-                      child: LinearProgressIndicator(
-                        value: _health2 / _maxHealth,
-                        valueColor: const AlwaysStoppedAnimation(Colors.purple),
-                        backgroundColor: Colors.grey,
-                      ),
-                    )),
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LogPage(
+                                title: "UwU",
+                                // TODO: use real log
+                                logEntries: widget.storage.currentGame.log)),
+                      );
+                    },
+                    style: Styling.defaultButtonStyle(),
+                    child: const Text("Log"),
+                  ),
+                ),
+                Text(widget.storage.currentGame.game_uuid),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('4000'),
-                  onPressed: () {
-                    _selectedAmount = 4000;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('2000'),
-                  onPressed: () {
-                    _selectedAmount = 2000;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('1000'),
-                  onPressed: () {
-                    _selectedAmount = 1000;
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('500'),
-                  onPressed: () {
-                    _selectedAmount = 500;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('100'),
-                  onPressed: () {
-                    _selectedAmount = 100;
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('50'),
-                  onPressed: () {
-                    _selectedAmount = 50;
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('+'),
-                  onPressed: () {
-                    _editNegative(false);
-                    _editPlayer1Life();
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('-'),
-                  onPressed: () {
-                    _editNegative(true);
-                    _editPlayer1Life();
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LogPage(
-                    title: "UwU",
-                    logEntries: _logList.cast<LogEntry>().reversed.toList())),
-          );
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.note),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          )),
     );
   }
 }

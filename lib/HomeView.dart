@@ -129,8 +129,8 @@ class _HomeView extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const PortraitView(title: "Game")),
+                                builder: (context) => PortraitView(
+                                    title: "Game", storage: storage)),
                           );
                         },
                         style: Styling.defaultButtonStyle(),
@@ -145,9 +145,7 @@ class _HomeView extends State<HomeView> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LandscapeOne(
-                                      title: "Game",
-                                      storage: storage,
-                                    )),
+                                    title: "Game", storage: storage)),
                           );
                         },
                         style: Styling.defaultButtonStyle(),

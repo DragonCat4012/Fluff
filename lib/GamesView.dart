@@ -15,6 +15,19 @@ class GamesView extends StatefulWidget {
 class _GamesView extends State<GamesView> {
   String currentGame = "";
 
+  Widget getStarWidget(Game game) {
+    return IconButton(
+    padding: EdgeInsets.zero,
+    color:  (game.game_uuid == widget.storage.currentGame.game_uuid) ? Styling.secondary : Colors.black, //<-- SEE HERE
+    icon: const Icon(
+      Icons.star,
+    ),
+    onPressed: () {
+      // TODO: implement Star Option
+    },
+    );
+  }
+
   Widget getTextWidgets(List<Game> games) {
     List<SizedBox> list = [];
     for (var i = 0; i < games.length; i++) {
@@ -46,8 +59,20 @@ class _GamesView extends State<GamesView> {
                       width: 10,
                     ),
                     Text(
-                      logSize.toString(),
-                    )
+                      '#$logSize',
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
+                      color: Colors.red, //<-- SEE HERE
+                      onPressed: () {
+                        // TODO: implement Delete Option
+                      },
+                    ),
+                    getStarWidget(games[i]),
+                    ElevatedButton(onPressed: () {}, child: Text("g")),
                   ],
                 ),
               ),

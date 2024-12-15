@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:yugioh_health_tracker/Util/Game.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
@@ -14,17 +16,20 @@ class GamesView extends StatefulWidget {
 
 class _GamesView extends State<GamesView> {
   String currentGame = "";
+  bool toBeUpdated = false;
 
   Widget getStarWidget(Game game) {
     return IconButton(
-    padding: EdgeInsets.zero,
-    color:  (game.game_uuid == widget.storage.currentGame.game_uuid) ? Styling.secondary : Colors.black,
-    icon: const Icon(
-      Icons.star,
-    ),
-    onPressed: () {
-      // TODO: implement Star Option
-    },
+      padding: EdgeInsets.zero,
+      color: (game.game_uuid == widget.storage.currentGame.game_uuid)
+          ? Styling.secondary
+          : Colors.grey,
+      icon: const Icon(
+        Icons.star,
+      ),
+      onPressed: () {
+        // TODO: implement Star Option
+      },
     );
   }
 
@@ -36,7 +41,9 @@ class _GamesView extends State<GamesView> {
       list.add(
         SizedBox(
             width: double.infinity,
-            height: MediaQuery.of(context).orientation == Orientation.portrait ? 100 : 50,
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 100
+                : 50,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextButton(
@@ -49,15 +56,13 @@ class _GamesView extends State<GamesView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(child: Text(
-                      games[i].game_uuid,
-                      style: TextStyle(
-                          color:
-                          getTextColorForGame(games[i].game_uuid, logSize)),
-                    ),),
-
-                    const SizedBox(
-                      width: 10,
+                    Flexible(
+                      child: Text(
+                        games[i].game_uuid,
+                        style: TextStyle(
+                            color: getTextColorForGame(
+                                games[i].game_uuid, logSize)),
+                      ),
                     ),
                     Text(
                       '#$logSize',
@@ -69,11 +74,14 @@ class _GamesView extends State<GamesView> {
                       ),
                       color: Colors.red,
                       onPressed: () {
-                        // TODO: implement Delete Option
+                        widget.storage.deleteGame(games[i].game_uuid);
+                        setState(() { // reload view
+                          toBeUpdated = !toBeUpdated;
+                        });
                       },
                     ),
                     getStarWidget(games[i]),
-                    ElevatedButton(onPressed: () {}, child: Text("g")),
+                    //     ElevatedButton(onPressed: () {}, child: Text("Log")),
                   ],
                 ),
               ),

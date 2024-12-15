@@ -49,6 +49,14 @@ class DataHandler {
     print("new game: ${currentGame.game_uuid}");
     fileHandler.writeGames(games);
   }
+
+  void deleteGame(String gameUUID) {
+    games = games.where((i) => i.game_uuid != gameUUID).toList();
+    if (gameUUID == currentGame.game_uuid) {
+      currentGame = games.last;
+    }
+    fileHandler.writeGames(games);
+  }
 }
 
 class FileHandler {

@@ -76,14 +76,17 @@ class _PortraitView extends State<PortraitView> {
                     RotatedBox(
                         quarterTurns: 3,
                         child: SizedBox(
-                          width: 200,
-                          height: 10,
-                          child: LinearProgressIndicator(
-                            value: vm.health1 / vm.maxHealth,
-                            valueColor:
-                                const AlwaysStoppedAnimation(Styling.accent),
-                            backgroundColor: Colors.grey,
-                            //  backgroundColor: Colors.lime,
+                          width: Styling.portraitHealthHeight,
+                          height: Styling.portraitHealthWidth,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                                Radius.circular(Styling.barRadius)),
+                            child: LinearProgressIndicator(
+                              value: vm.health1 / vm.maxHealth,
+                              valueColor:
+                                  const AlwaysStoppedAnimation(Styling.accent),
+                              backgroundColor: Colors.grey,
+                            ),
                           ),
                         )),
                     Column(
@@ -103,44 +106,57 @@ class _PortraitView extends State<PortraitView> {
                     RotatedBox(
                         quarterTurns: 3,
                         child: SizedBox(
-                          width: 200,
-                          height: 10,
-                          child: LinearProgressIndicator(
-                            value: vm.health2 / vm.maxHealth,
-                            valueColor:
-                                const AlwaysStoppedAnimation(Styling.secondary),
-                            backgroundColor: Colors.grey,
+                          width: Styling.portraitHealthHeight,
+                          height: Styling.portraitHealthWidth,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                                Radius.circular(Styling.barRadius)),
+                            child: LinearProgressIndicator(
+                              value: vm.health2 / vm.maxHealth,
+                              valueColor: const AlwaysStoppedAnimation(
+                                  Styling.secondary),
+                              backgroundColor: Colors.grey,
+                            ),
                           ),
                         )),
                   ],
                 ),
-                SegmentedButton(
-                  segments: const [
-                    ButtonSegment(
-                      value: true,
-                      label: Text("Purple"),
-                      icon: Icon(null),
-                    ),
-                    ButtonSegment(
-                      value: false,
-                      label: Text("Orange"),
-                      icon: Icon(null),
-                    )
-                  ],
-                  selected: <bool>{_isPurpleSelected},
-                  showSelectedIcon: false,
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: SegmentedButton(
+                    segments: const [
+                      ButtonSegment(
+                        value: true,
+                        label: Text("Purple"),
+                        icon: Icon(null),
+                      ),
+                      ButtonSegment(
+                        value: false,
+                        label: Text("Orange"),
+                        icon: Icon(null),
+                      )
+                    ],
+                    selected: <bool>{_isPurpleSelected},
+                    showSelectedIcon: false,
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
                       ),
                     ),
+                    onSelectionChanged: (newSelection) {
+                      setState(() {
+                        _isPurpleSelected = newSelection.first;
+                      });
+                    },
                   ),
-                  onSelectionChanged: (newSelection) {
-                    setState(() {
-                      _isPurpleSelected = newSelection.first;
-                    });
-                  },
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 getLifepointsOptions(),
                 const SizedBox(

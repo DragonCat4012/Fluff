@@ -18,7 +18,6 @@ class LandscapeOne extends StatefulWidget {
 }
 
 class _LandscapeOne extends State<LandscapeOne> {
-  static const double barRadius = 8;
   var vm = GameViewModel(8000);
   bool shouldBeUpdated = false;
 
@@ -88,8 +87,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                             height: 20,
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(barRadius),
-                                  bottomLeft: Radius.circular(barRadius)),
+                                  topLeft: Radius.circular(Styling.barRadius),
+                                  bottomLeft: Radius.circular(Styling.barRadius)),
                               child: LinearProgressIndicator(
                                 minHeight: 20,
                                 value: vm.health1 / vm.maxHealth,
@@ -106,8 +105,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                             height: 20,
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(barRadius),
-                                  bottomRight: Radius.circular(barRadius)),
+                                  topRight: Radius.circular(Styling.barRadius),
+                                  bottomRight: Radius.circular(Styling.barRadius)),
                               child: RotatedBox(
                                 quarterTurns: 2,
                                 child: LinearProgressIndicator(

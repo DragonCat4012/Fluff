@@ -6,6 +6,9 @@ const ORANGE = Color(0xffe99f16); //ff prefix for alpha?
 class Styling {
   static const accent = PURPLE;
   static const secondary = ORANGE;
+  static const double barRadius = 8;
+  static const double portraitHealthHeight = 300;
+  static const double portraitHealthWidth = 20;
 
   Styling();
 

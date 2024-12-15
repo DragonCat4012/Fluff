@@ -18,7 +18,7 @@ class _GamesView extends State<GamesView> {
   Widget getStarWidget(Game game) {
     return IconButton(
     padding: EdgeInsets.zero,
-    color:  (game.game_uuid == widget.storage.currentGame.game_uuid) ? Styling.secondary : Colors.black, //<-- SEE HERE
+    color:  (game.game_uuid == widget.storage.currentGame.game_uuid) ? Styling.secondary : Colors.black,
     icon: const Icon(
       Icons.star,
     ),
@@ -66,7 +66,7 @@ class _GamesView extends State<GamesView> {
                       icon: const Icon(
                         Icons.delete,
                       ),
-                      color: Colors.red, //<-- SEE HERE
+                      color: Colors.red,
                       onPressed: () {
                         // TODO: implement Delete Option
                       },

@@ -36,7 +36,7 @@ class _GamesView extends State<GamesView> {
       list.add(
         SizedBox(
             width: double.infinity,
-            height: 50,
+            height: MediaQuery.of(context).orientation == Orientation.portrait ? 100 : 50,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextButton(
@@ -49,12 +49,13 @@ class _GamesView extends State<GamesView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    Flexible(child: Text(
                       games[i].game_uuid,
                       style: TextStyle(
                           color:
-                              getTextColorForGame(games[i].game_uuid, logSize)),
-                    ),
+                          getTextColorForGame(games[i].game_uuid, logSize)),
+                    ),),
+
                     const SizedBox(
                       width: 10,
                     ),

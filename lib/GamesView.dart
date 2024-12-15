@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:yugioh_health_tracker/Util/Game.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
@@ -14,6 +16,22 @@ class GamesView extends StatefulWidget {
 
 class _GamesView extends State<GamesView> {
   String currentGame = "";
+  bool toBeUpdated = false;
+
+  Widget getStarWidget(Game game) {
+    return IconButton(
+      padding: EdgeInsets.zero,
+      color: (game.game_uuid == widget.storage.currentGame.game_uuid)
+          ? Styling.secondary
+          : Colors.grey,
+      icon: const Icon(
+        Icons.star,
+      ),
+      onPressed: () {
+        // TODO: implement Star Option
+      },
+    );
+  }
 
   Widget getTextWidgets(List<Game> games) {
     List<SizedBox> list = [];
@@ -23,7 +41,9 @@ class _GamesView extends State<GamesView> {
       list.add(
         SizedBox(
             width: double.infinity,
-            height: 50,
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 100
+                : 50,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextButton(
@@ -36,18 +56,32 @@ class _GamesView extends State<GamesView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      games[i].game_uuid,
-                      style: TextStyle(
-                          color:
-                              getTextColorForGame(games[i].game_uuid, logSize)),
+                    Flexible(
+                      child: Text(
+                        games[i].game_uuid,
+                        style: TextStyle(
+                            color: getTextColorForGame(
+                                games[i].game_uuid, logSize)),
+                      ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
                     Text(
-                      logSize.toString(),
-                    )
+                      '#$logSize',
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
+                      color: Colors.red,
+                      onPressed: () {
+                        widget.storage.deleteGame(games[i].game_uuid);
+                        setState(() { // reload view
+                          toBeUpdated = !toBeUpdated;
+                        });
+                      },
+                    ),
+                    getStarWidget(games[i]),
+                    //     ElevatedButton(onPressed: () {}, child: Text("Log")),
                   ],
                 ),
               ),

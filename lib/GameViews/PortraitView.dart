@@ -21,22 +21,27 @@ class PortraitView extends StatefulWidget {
 
 class _PortraitView extends State<PortraitView> {
   var vm = GameViewModel(8000);
-  int _health1 = 8000; // me
-  int _health2 = 8000; // opponent
-  final int _maxHealth = 8000;
-
+  bool shouldBeUpdated = false;
   bool _isMeSelected = true;
-  String e = "";
 
   Widget getLifepointsOptions() {
     Color color = Styling.accent;
-    int target = 1;
+    int target = 2;
     if (_isMeSelected) {
       color = Styling.secondary;
-      target = 2;
+      target = 1;
     }
     return LifePointOptionsView(
-        vm: vm, color: color, target: target, storage: widget.storage);
+      vm: vm,
+      color: color,
+      target: target,
+      storage: widget.storage,
+      onUpdate: () {
+        setState(() {
+          shouldBeUpdated = !shouldBeUpdated;
+        });
+      },
+    );
   }
 
   @override
@@ -66,7 +71,7 @@ class _PortraitView extends State<PortraitView> {
                           width: 200,
                           height: 10,
                           child: LinearProgressIndicator(
-                            value: _health1 / _maxHealth,
+                            value: vm.health1 / vm.maxHealth,
                             valueColor:
                                 const AlwaysStoppedAnimation(Styling.secondary),
                             backgroundColor: Colors.grey,
@@ -75,12 +80,12 @@ class _PortraitView extends State<PortraitView> {
                         )),
                     Column(
                       children: [
-                        Text('$_health1',
+                        Text('${vm.health1}',
                             style: const TextStyle(
                                 color: Styling.secondary,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
-                        Text('$_health2',
+                        Text('${vm.health2}',
                             style: const TextStyle(
                                 color: Styling.accent,
                                 fontSize: 25,
@@ -93,7 +98,7 @@ class _PortraitView extends State<PortraitView> {
                           width: 200,
                           height: 10,
                           child: LinearProgressIndicator(
-                            value: _health2 / _maxHealth,
+                            value: vm.health2 / vm.maxHealth,
                             valueColor:
                                 const AlwaysStoppedAnimation(Styling.accent),
                             backgroundColor: Colors.grey,

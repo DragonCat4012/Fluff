@@ -11,11 +11,15 @@ class LifePointOptionsView extends StatefulWidget {
       required this.vm,
       required this.color,
       required this.target,
-      required this.storage});
+      required this.storage,
+      required this.onUpdate
+      });
+
   final GameViewModel vm;
   final Color color;
   final int target;
   final DataHandler storage;
+  final VoidCallback onUpdate;
 
   @override
   State<LifePointOptionsView> createState() => _LifePointOptionsView();
@@ -33,6 +37,7 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
       widget.storage.addLogEntryToGame(LogEntry(
           amount, widget.vm.health1, widget.vm.health2, widget.target == 1));
     });
+    widget.onUpdate();
   }
 
   void _setAmount(int amount) {

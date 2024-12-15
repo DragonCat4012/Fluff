@@ -119,18 +119,20 @@ class _LandscapeOne extends State<LandscapeOne> {
                         children: [
                           Expanded(
                               child: LifePointOptionsView(
-                                  vm: vm,
-                                  color: PURPLE,
-                                  target: 1,
-                                  storage: widget.storage)),
+                            vm: vm,
+                            color: PURPLE,
+                            target: 1,
+                            storage: widget.storage,
+                            onUpdate: () {},
+                          )),
                           SizedBox(
                             width: 100,
-                            child:
-                            ElevatedButton(
-                              child: const Text('Log'),
+                            child: ElevatedButton(
                               onPressed: widget.storage.currentGame.log.isEmpty
                                   ? null
-                                  : () => navigateToLog(widget.storage.currentGame.log),
+                                  : () => navigateToLog(
+                                      widget.storage.currentGame.log),
+                              child: const Text('Log'),
                             ),
                           ),
                           Expanded(
@@ -138,7 +140,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                                   vm: vm,
                                   color: ORANGE,
                                   target: 2,
-                                  storage: widget.storage)),
+                                  storage: widget.storage,
+                                  onUpdate: () {})),
                         ],
                       )),
                 ],
@@ -147,11 +150,13 @@ class _LandscapeOne extends State<LandscapeOne> {
       ),
     );
   }
+
   void navigateToLog(logs) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => LogPage(title: "Log", logEntries: widget.storage.currentGame.log)),
+          builder: (context) => LogPage(
+              title: "Log", logEntries: widget.storage.currentGame.log)),
     );
   }
 }
